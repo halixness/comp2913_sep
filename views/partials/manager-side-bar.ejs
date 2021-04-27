@@ -1,0 +1,75 @@
+<div class="account__side-bar account__side-bar--admin">
+    <div class="side-bar__profile-image">
+        <img src="/img/icons/user.png" /> <!-- ACCOUNT PROFILE PICTURE HERE (optional) -->
+    </div>
+
+    <div class="side-bar__header">
+        
+        <!-- Useful for ajax -->
+        <input id="ajax-user-id" type="hidden" value="<%- user.id %>"/></h2>
+        
+        <h2><%- user.name %> <%- user.surname%></h2>
+        <small class="header__email"><%- user.email %></small>
+
+        <% if(locals.session.userType == 3) { %>
+            <h2>Admin</h2>
+        <% } %>
+    </div>
+
+    <div class="side-bar__nav">
+        <ul class="nav__items">
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/manager/overview">
+                    <img src="/img/account/star.png" />
+                    <h3>Overview</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/manager/statistics">
+                    <img src="/img/account/graphic.png" />
+                    <h3>View Usage Statistics</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/manager/register/employee">
+                    <img src="/img/account/account.png" />
+                    <h3>Add a new Employee</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/manager/activities/new">
+                    <img src="/img/icons/gym-white.png" />
+                    <h3>Configure Activities</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/manager/facilities/new">
+                    <img src="/img/icons/basketball-white.png" />
+                    <h3>Configure Facilities</h3>
+                </a>
+            </li>
+
+            <li class="nav__item nav__item--last">
+                <div class="nav__item--logout hvr-sweep-to-right">
+                    <a href="/user/logout">
+                        <h3>Logout</h3>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="account__side-open">
+    <div class="side-open__bar"></div>
+
+    <div class="side-open__label">
+        <div class="label__expand">
+            Expand
+        </div>
+    </div>
+</div>

@@ -1,0 +1,203 @@
+// Login page styling 
+
+
+.login {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+
+    &--background {
+        background-image: url('/img/gallery/person-holding-barbell-841130.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+
+    &__half {
+        // height: 100%;
+        width: 50%;
+        color: $white;
+        display: flex;
+        align-items: center;
+
+        &--form {
+            background-color: $quatenary;
+            opacity: .9;
+            padding: 40px 60px;
+        }
+
+        &--register {
+            display: none;
+        }
+
+        &--background {
+            background-image: url('/img/gallery/person-holding-barbell-841130.jpg');
+            background-position: 50% 0%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .half {
+            &__slide {
+                &--d-none {
+                    display: none;
+                }
+            }
+
+            &__divider {
+                width: 100%;
+                text-align: center;
+            }
+
+            &__form-transition-header {
+                border: $border_thickness solid $black;
+                display: inline-block;
+                padding: $padding_border_block;
+                background-color: $white;
+                color: $black;
+            }
+
+            &__login-header {
+                font-weight: bold;
+                text-transform: uppercase;
+                padding: $padding_border_block;
+                margin-top: 20px;
+                text-align: center;
+            }
+            
+            &__login-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+                padding: $padding_border_block;
+
+                img {
+                    width: $icon_default_width;
+                }
+            }
+
+            &__login-form {
+                margin-top: 40px;
+                margin: 40px 20px 0 20px;
+                text-align: center;
+
+
+                .login-form {
+                    &__group {
+                        margin: 15px 20%;
+
+                        &--col {
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        &--row {
+                            &:first-child {
+                                padding-right: 5px;
+                            }
+
+                            &:last-child {
+                                padding-left: 5px;
+                            }
+                        }
+                    }
+
+                    &__label {
+                        display: block;
+                        padding: 5px;
+                    }
+
+                    &__input {
+                        border: $border_thickness solid $black;
+                        padding: $padding_border_block;
+                        width: 100%;
+                        // max-width: 400px;
+                        // min-width: 200px;
+                        // width: 60%;
+                    }
+
+                    &__btn {
+                        border: $border_thickness solid $black;
+                        padding: $padding_border_block;
+                        background-color: $white;
+                        cursor: pointer;
+                    }
+
+                    &__error {
+                        color: $red;
+
+                        &--d-none {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            &__bottom-link {
+                margin: 5px 0;
+
+                &--transition {
+                    display: none;
+                }
+
+                .bottom-link {
+                    &__link {
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: $max-width-primary) {
+    .login {
+        &__half {
+            width: 100%;
+
+            &--background {
+                display: none;
+            }
+
+            .half {
+                &__bottom-link {
+                    &--transition {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max-width-secondary) {  
+    .login {
+        &__half {
+            width: 100%;
+        }
+    }  
+}
+
+@media only screen and (max-width: $max-width-tertiary) {
+    .login {
+        &__half {
+            &--form {
+                padding: 40px 0;
+            }
+
+            .half {
+                &__login-form {
+                    .login-form {
+                        &__group {
+                            margin: 10px 10%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

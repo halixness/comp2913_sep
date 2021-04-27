@@ -1,0 +1,430 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+<head>
+    <!-- Stripe Payment -->
+    <script src="https://js.stripe.com/v3/" defer></script>
+    <script src="/js/addCard.js" defer></script>
+</head>
+
+<div class="modal modal--delete">
+    <div class="modal__container">
+        <div class="modal__header modal__header--danger">
+            <h2>Remove Card?</h2>
+            <div class="header__close modal--close">
+                <img src="/img/icons/close-white.png" />
+            </div>
+        </div>
+
+        <div class="modal__content">
+            Are You sure You want to Proceed?
+        </div>
+
+        <div class="modal__close">
+            <a href="###" id="delete-payment" class="close__close hvr-sweep-to-right modal--close">
+                <h3>Remove Card</h3>
+            </a>
+            
+            <div class="close__close hvr-sweep-to-right modal--close">
+                <h3>Close</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal--modal">
+    <div class="modal__container">
+        <div class="modal__header">
+            <h2>Add Payment Method</h2>
+            <div class="header__close modal--close">
+                <img src="/img/icons/close.png" />
+            </div>
+        </div>
+        
+        <form class="modal__form sr-payment-form" action="/user/account/add/card" method="POST" autocomplete="off" id="payment-form">
+            <div class="modal__content">
+                <div class="sr-root">
+                    <div class="sr-main">
+                        <form id="payment-form payment" class="sr-payment-form">
+                            <div class="sr-combo-inputs-row payment__input">
+                                <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                                <div class="sr-input sr-card-element" id="card-element"></div>
+                            </div>
+
+                            <div class="sr-field-error payment__error" id="card-errors" role="alert"></div>
+
+                            <div class="payment__inline">
+                                <button id="submit" class="payment__submit hvr-sweep-to-right">
+                                    <h3 id="button-text">Add Card</h3><span id="order-amount"></span>
+                                </button>
+
+                                <img src="/img/elements/loader.gif" class="payment__spinner payment__spinner--card payment__spinner--hidden" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal__content modal__content--split">
+                <div class="content__half--form" id="card-element">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+
+                    <% if(locals.error){ %>
+                        <% for (var i =0; i < error.length;  i++ ) { %>
+                            <% if(error[i].path == 'unsuccessful'){ %>   
+                                <p class="form__error modal--open-auto"><%- error[i].message %></p>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+
+
+                    <div class="form__group" id="card-errors" role="alert">
+                        <label class="form__label" for="card-element"><h3>Card Number</h3></label>
+                        <input id="card_number" class="form__input" type="text" name="card_number" placeholder="XXXX XXXX XXXX XXXX XXXX" value="<%- form.card_number %>"/>   
+                        
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'card_number'){ %>   
+                                    <p id="card_number-error" class="form__error modal--open-auto"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+
+                    <div class="form__group form__group--col">
+                        <div class="form__group--row">
+                            <label class="form__label"><h3>Expire Date </h3></label>
+                            <input id="expire_date" class="form__input" type="text" name="expire_date" placeholder="XX/XX" value="<%- form.expire_date %>"/>
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'expire_date'){ %>   
+                                        <p id="expire_date-error" class="form__error modal--open-auto"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="form__group--row">
+                            <label class="form__label"><h3>CVV</h3></label>
+                            <input id="cvv" class="form__input" type="text" name="cvv" placeholder="XXX" value="<%- form.cvv %>"/>
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'cvv'){ %>   
+                                        <p id="cvv-error" class="form__error modal--open-auto"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>  
+
+                    <div class="form__group">
+                        <label class="form__label"><h3>Type</h3></label>
+                        <!-- <input id="type" class="form__input" type="text" name="type" placeholder="VISA/Mastercard..." value="<%- form.type %>"/>
+
+                        <select id="type" class="form__select" name="type" value="<%- form.type %>">
+                            <option value="VISA">VISA</option>
+                            <option value="Mastercard">Mastercard</option>
+                        </select>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'type'){ %>   
+                                    <p id="type-error" class="form__error modal--open-auto"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal__close">
+                <button class="close__close hvr-sweep-to-right" type="submit" ><h3>Add Card</h3></button>
+
+                <div class="close__close hvr-sweep-to-right modal--close">
+                    <h3>Close</h3>
+                </div>                
+            </div> -->
+        </form>
+    </div>  
+</div>
+
+
+<div class="container">
+    <!------ Content ------>
+    <div class="account account--background">
+        <%- include('../../partials/account-side-bar') %>
+        <div class="account__section account__section--no-margin">
+            <div class="account__section account__section--full-width account__overview">
+                <div class="section__title">
+                    <h2>Your Payment Details</h2>
+                </div>
+
+                <!-- <div class="details__content details__content--success">
+                    <h2 class="content__success">Payment Method Added Successfully</h2>
+                </div> -->
+
+                <% if(locals.cards && locals.cards.length > 0){ %>
+                    <% for (var i = 0; i < cards.length;  i++ ) { %>
+                        <% if(cards[i].type != "__CASH__" ) { %> <!-- Dont display cash payment card everr -->
+                            <div class="overview__option hvr-float">
+                                <div class="option__content option__content--center option__content--yellow">
+                                    <div class="content__title content__title--margin-bottom">
+                                        <h2><%- cards[i].type %> Credit Card</h2>
+                                        <h3>ending in <%- cards[i].number %></h3>
+                                    </div>
+
+                                    <div class="content__dsc content__dsc--flex">       
+                                        <div class="content__field">
+                                            <div class="field__field">
+                                                <img src="/img/account/calendar-black.png" />
+                                                <h3>Expire Date:</h3>
+                                                <%- cards[i].expire_date %>
+                                            </div>
+
+                                            <div class="field__field">
+                                                <img src="/img/icons/pay.png" />
+                                                <h3>Type:</h3>
+                                                <%- cards[i].type %>
+                                            </div>
+                                        </div>      
+                                    </div>
+
+                                    <div class="content__inline content__inline--right">
+                                        <div id="<%- cards[i].id %>" class="content__explore content__explore--black hvr-sweep-to-right hvr-sweep-to-right--white content__explore--delete-payment modal--open-delete">
+                                            <a href="###">
+                                                <h3>Remove Card</h3>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+        
+                <% } else { %>
+                    <div class="section__not-found">
+                        <div class="not-found__image">
+                            <img src="/img/icons/sadface.jpg" />
+                        </div>
+
+                        <h2>No Payment Methods Found</h2>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="account__section-container account__section--full-width">
+                <% if(cashPayments.length > 0) { %>
+                    <div class="breadcrumbs breadcrumbs--margin-bottom">
+                        <div class="breadcrumbs__selector">
+                            <div class="selector__item selector__item--selected" target="card">
+                                <h3>Card Payments</h3>
+                            </div>
+                
+                            <div class="selector__item" target="cash">
+                                <h3>Cash Payments</h3>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+                
+    
+                <div class="account__section account__section--full-width account__section--no-margin account__details" id="card">
+                    <div class="account__section account__section--full-width account__section--no-margin account__payment-history">
+                
+                        <% if(locals.cards.length > 0){ %>
+                            <div class="payment-history__option">
+                                <form class=" payment-history__option-form">
+                                    <div class="option-form__group">
+                                        <label class="option-form__label"><h3>View Payment History:</h3></label>
+                                        <select id="card-select" class="option-form__select" name="card-history">
+                                            <% for (var i = 0; i < cards.length;  i++ ) { %>
+                                                <option value="<%- cards[i].id %>"><%- cards[i].type %> ending in <%- cards[i].number %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        <% } %>
+    
+                        <div class="payment-history__option">
+                            <button class="payment-history__button hvr-sweep-to-right modal--open">
+                                <h3>Add Payment Method</h3>
+                            </button>
+                        </div>  
+                    </div>
+
+
+                    
+                    <div class="account__section account__section--full-width account__details" id="payment-history">
+                        <% if (payments.length > 0) { %>
+                            <div class="section__title">
+                                <h2>Your Payment History</h2>
+                            </div>
+
+                            <% for (var i = 0; i < payments.length; i++) { %>
+
+                                <div class="details__content">
+                                    <div class="content__form-title content__form-title--top">
+                                        <div class="form-title__title">
+                                            <h2>Payment No. <%- payments[i].id %></h2>
+                                        </div>
+                        
+                                        <div class="form-title__desc">
+                                            <% if(payments[i].membership_type != null) { %>
+                                                <% if (payments[i].membership_type == 3) { %>
+                                                    Annual Sports Pass Membership
+                                                <% } else if (payments[i].membership_type == 2) { %>
+                                                    Annual <%- payments[i].sport_name %> Membership
+                                                <% } else { %>
+                                                    Monthly <%- payments[i].sport_name %> Membership
+                                                <% } %>
+                                            <% } else { %>
+                                                <%- payments[i].activity_name %>
+                                            <% } %>
+                                        </div>
+
+                                        <div class="form-title__book hvr-sweep-to-right">
+                                            <a href="/user/account/payment/receipt?payment_id=<%-payments[i].id%>" target="_blank">
+                                                <h3>Show Reciept</h3>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="content__list">
+                                        <div class="list__field">
+                                            <div class="field__field">
+                                                <img src="/img/icons/clock.png" />
+                                                <h3>Purchase Date:</h3>
+                                                <span><%- payments[i].purchase_date %></span>
+                                            </div>
+
+                                            <div class="field__field">
+                                                <img src="/img/icons/discount.png" />
+                                                <h3>Amount Cost:</h3>
+                                                <span>£<%- payments[i].amount %></span>
+                                            </div>
+
+                                            <div class="field__field">
+                                                <img src="/img/icons/pay.png" />
+                                                <h3>Payment Method:</h3>
+                                                <span><%- payments[i].type %> ending in <%- payments[i].number %></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="content__form-title content__form-title--side">
+                                        <div class="form-title__title">
+                                            <h2>Payment No. <%- payments[i].id %></h2>
+
+                                        </div>
+                        
+                                        <div class="form-title__desc">
+                                            <% if(payments[i].membership_type != null) { %>
+                                                <% if (payments[i].membership_type == 3) { %>
+                                                    Annual Sports Pass Membership
+                                                <% } else if (payments[i].membership_type == 2) { %>
+                                                    Annual <%- payments[i].sport_name %> Membership
+                                                <% } else { %>
+                                                    Monthly <%- payments[i].sport_name %> Membership
+                                                <% } %>
+                                            <% } else { %>
+                                                <%- payments[i].activity_name %>
+                                            <% } %>
+                                        </div>
+
+                                        <div class="form-title__book hvr-sweep-to-right">
+                                            <a href="/user/account/payment/receipt?payment_id=<%-payments[i].id%>" target="_blank">
+                                                <h3>Show Reciept</h3>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>    
+                        <% } %>
+                    </div>
+                </div>
+
+                <% if(cashPayments.length > 0) { %>
+                    <div class="account__section account__section--full-width account__section--no-margin-bottom account__section--d-none account__details" id="cash">
+                        <div class="section__title">
+                            <h2>Your Cash Payment History</h2>
+                        </div>
+
+                        <% for (var i = 0; i < cashPayments.length; i++) { %>
+                            <div class="details__content">
+                                <div class="content__form-title content__form-title--top">
+                                    <div class="form-title__title">
+                                        <h2>Payment No. <%- cashPayments[i].id %></h2>
+                                    </div>
+                    
+                                    <div class="form-title__desc">
+                                        <%- cashPayments[i].activity_name %>
+                                    </div>
+
+                                    <div class="form-title__book hvr-sweep-to-right">
+                                        <a href="/user/account/payment/cash/receipt?payment_id=<%-cashPayments[i].id%>" target="_blank">
+                                            <h3>Show Reciept</h3>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="content__list">
+                                    <div class="list__field">
+                                        <div class="field__field">
+                                            <img src="/img/icons/clock.png" />
+                                            <h3>Purchase Date:</h3>
+                                            <span><%- cashPayments[i].purchase_date %></span>
+                                        </div>
+
+                                        <div class="field__field">
+                                            <img src="/img/icons/discount.png" />
+                                            <h3>Amount Cost:</h3>
+                                            <span>£<%- cashPayments[i].activity_cost %></span>
+                                        </div>
+
+                                        <div class="field__field">
+                                            <img src="/img/icons/pay.png" />
+                                            <h3>Amount Paid:</h3>
+                                            <span>£<%- cashPayments[i].amount %></span>
+                                        </div>
+
+                                        <div class="field__field">
+                                            <img src="/img/account/account-black.png" />
+                                            <h3>purchaser:</h3>
+                                            <span><%- cashPayments[i].user_name %> <%- cashPayments[i].user_surname %>: <%- cashPayments[i].user_email %></span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="content__form-title content__form-title--side">
+                                    <div class="form-title__title">
+                                        <h2>Payment No. <%- cashPayments[i].id %></h2>
+
+                                    </div>
+                    
+                                    <div class="form-title__desc">
+                                        <%- cashPayments[i].activity_name %>
+                                    </div>
+
+                                    <div class="form-title__book hvr-sweep-to-right">
+                                        <a href="/user/account/payment/cash/receipt?payment_id=<%-cashPayments[i].id%>" target="_blank">
+                                            <h3>Show Reciept</h3>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>

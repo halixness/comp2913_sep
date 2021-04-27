@@ -1,0 +1,1 @@
+Temporary folders for reasearch of requirements. Combine these into a single document with tools, requirements investigation etc. (Basically what we did for Software Eng Principles CW1)

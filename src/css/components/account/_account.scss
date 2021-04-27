@@ -1,0 +1,385 @@
+// Account page (pages) styling
+
+
+@import "account-overview";
+@import "account-details";
+
+.account {
+    display: flex;
+    opacity: .9;
+    overflow: hidden;
+
+    &--center {
+        justify-content: center;
+    }
+
+    &--background {
+        background-image: url('/img/test.png');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &__side-open {
+        cursor: pointer;
+        color: $white;
+        display: none;
+        z-index: 6;
+
+        .side-open {
+            &__bar {
+                background-color: $black;
+                width: 20px;
+                min-width: 20px;
+                height: 100%;
+            }
+
+            &__label {
+                position: absolute;
+                margin-left: 20px;
+                z-index: 6;
+
+                .label {
+                    &__expand {
+                        background-color: $tertiary;
+                        transform: rotate(-90deg);
+                        transform-origin: 51px 51px;
+                        padding: 5px;
+                    }
+                }
+            }
+        }
+        
+    }
+
+    &__side-bar {
+        width: 20%;
+        min-width: $account_side_bar_width;
+        background-color: $quatenary; //or quatenary??
+        color: $white;
+        padding: 40px 0;
+        padding-bottom: 60px;
+        margin-left: 0;
+        transition: .25s;
+        z-index: 6;
+
+        &--admin {
+            background-color: $black;
+        }
+
+        &--filter {
+            background-color: $white;
+            color: $black;
+        }
+
+
+        &--open {
+            margin-left: 0 !important;
+        }
+
+
+        .side-bar {
+            &__header {
+                font-weight: bold;
+                text-transform: uppercase;
+                padding: $padding_border_block;
+                margin-top: 20px;
+                text-align: center;
+
+                .header {
+                    &__email {
+                        font-weight: normal;
+                        text-transform: none;
+                    }
+                }
+            }
+
+            &__profile-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+                padding: $padding_border_block;
+
+                img {
+                    width: $icon_default_width;
+                }
+            }
+
+            &__nav {
+                display: flex;
+                justify-content: center;
+
+                .nav {
+                    &__items {
+                        padding: 20px;
+                    }
+
+                    &__item {
+                        padding: 10px 0;
+
+                        &--last {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 20px;
+                        }
+
+                        &--logout {
+                            border: $border_thickness solid $white;
+                            display: inline-block;
+                            padding: $padding_border_block;
+                            margin-right: 15px;
+                        }
+
+                        &--submit {
+                            background-color: $white;
+                            border-color: $black;
+                            cursor: pointer;
+                            color: $black;
+                        }
+
+                        .item {
+                            &__link {
+                                display: flex;
+                                align-items: center;
+
+                                img {
+                                    width: $icon_small_width;
+                                    padding-right: 10px;
+                                }
+                            }
+
+                            &__filter {
+                                text-align: center;
+
+                                .filter {
+                                    &__label {
+                                        display: block;
+                                        padding: 5px;
+                                    }
+
+                                    &__input {
+                                        border: $border_thickness solid $black;
+                                        padding: $padding_border_block;
+                                        width: 100%;
+                                    }
+
+                                    &__select {
+                                        border: $border_thickness solid $black;
+                                        background-color: $white;
+                                        padding: $padding_border_block;
+                                        color: $black;
+                                        width: 100%;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__section-container {
+        width: 80%;
+    }
+
+    &__section {
+        width: 80%;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        align-content: flex-start;
+        flex-wrap: wrap;
+        margin: 60px 0px;
+        // height: 0%;
+
+        &--no-margin {
+            margin: 0;
+        }
+
+        &--no-margin-top {
+            margin-top: 0;
+        }
+
+        &--no-margin-bottom {
+            margin-bottom: 0;
+        }
+
+        &--d-none {
+            display: none;
+        }
+
+        &--full-width {
+            width: 100%;
+        }
+
+        &--center {
+            text-align: center;
+        }
+
+        .section {
+            &__not-found {
+                text-align: center;
+                width: 100%;
+                color: $black;
+
+                .not-found {
+                    &__image {
+                       width: 100%;
+                       display: flex;
+                       justify-content: center;
+
+                        img {
+                            width: $icon_default_width;
+                            margin: 40px;
+                        }
+                    }
+
+                    &__link {
+                        border: $border_thickness solid $black;
+                        padding: $padding_border_block;
+                        display: inline-block;
+                        margin-top: 20px;
+                        color: $black;
+                        background-color: $white;
+                    }
+                }
+            }
+
+
+            &__title {
+                width: 100%;
+                color: $black !important;
+                text-align: center;
+                margin-bottom: 40px;
+                align-self: flex-start;
+            }
+
+            &__filter {
+                display: flex;
+                flex-wrap: wrap;
+                margin-bottom: 40px;
+                // background-color: $primary;
+                // color: $white;
+                padding: 20px;
+
+
+                .filter {
+                    &__half {
+                        width: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+
+                        &--title {
+                            width: 20%;
+                        }
+
+                        &--filter {
+                            width: 80%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__payment-history {
+        display: flex;
+        align-items: center;
+
+        .payment-history {
+            &__option {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                padding: 5px;
+            }
+
+            &__option-form {
+                color: $black;
+                text-align: center;
+
+                .option-form {
+                    &__label {
+                        display: inline-block;
+                        padding: $padding_border_block;
+                    }
+
+                    &__select {
+                        border: $border_thickness solid $black;
+                        background-color: $white;
+                        padding: $padding_border_block;
+                        font-weight: bold;
+                        color: $black;
+                        font-size: $header_3;
+                        cursor: pointer;
+                    }
+                }
+            }
+            
+            &__button {
+                border: $border_thickness solid $black;
+                padding: $padding_border_block;
+                // margin-top: 20px;
+                color: $black;
+                background-color: $white;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: $max_width_primary) {
+    .account {
+        &__side-bar {
+            margin-left: 0 !important;
+        }
+    }
+}
+
+
+@media only screen and (max-width: $max_width_primary) {
+    .account {
+        &__side-open {
+            display: flex;
+        }
+
+        &__side-bar {
+            margin-left: -$account_side_bar_width;
+        }
+
+        &__section-container {
+            width: 100%;
+        }
+
+        &__section {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_secondary) {
+    .account {
+        &__payment-history {
+            .payment-history {
+                &__option {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_tertiary) {
+    .account {
+        &__side-bar {
+            min-width: $account_side_bar_small_width;
+            margin-left: -$account_side_bar_small_width;
+        }
+    }
+}

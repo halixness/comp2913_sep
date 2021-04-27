@@ -1,0 +1,33 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+
+<div class="container container--full-height-no-header">
+    <div class="error-page">
+        <div class="error-page__info">
+            <div class="info__content">
+                <div class="content__title">Oops!</div>   
+                <h2>There seems to be an error on the page your trying to reach</h2>
+                <h3>For the Developer:</h3>
+                <div class="content__error"><%- error %></div>
+
+                <div class="content__link hvr-sweep-to-right">
+                    <a href="/home">
+                        <h3>Return to safety</h3>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="info__spacer"></div>
+        </div>
+
+
+        <div class="error-page__image">
+            <img src="/img/elements/error2.gif" />
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/foot') %>

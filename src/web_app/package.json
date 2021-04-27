@@ -1,0 +1,49 @@
+{
+  "name": "comp2913_sep",
+  "version": "1.0.0",
+  "description": "Web App",
+  "main": "app.js",
+  "dependencies": {
+    "@hapi/joi": "17.1.0",
+    "busboy": "^0.3.1",
+    "client-sessions": "^0.8.0",
+    "cookie-parser": "^1.4.4",
+    "csurf": "^1.11.0",
+    "dotenv": "^8.2.0",
+    "ejs": "3.0.1",
+    "express": "4.17.1",
+    "hover.css": "^2.3.2",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "2.2.1",
+    "moment": "2.24.0",
+    "multer": "^1.4.2",
+    "mysql": "2.18.1",
+    "nodemailer": "^6.4.6",
+    "nodemon": "2.0.2",
+    "pdfkit": "^0.11.0",
+    "qrcode": "^1.4.4",
+    "request": "2.88.2",
+    "sqlstring": "^2.3.1",
+    "stripe": "^8.38.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/joejeffcock/comp2913_sep.git"
+  },
+  "keywords": [
+    "sport",
+    "nodejs",
+    "webapp",
+    "responsive"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/joejeffcock/comp2913_sep/issues"
+  },
+  "homepage": "https://gitlab.com/joejeffcock/comp2913_sep#README"
+}

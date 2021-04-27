@@ -1,0 +1,338 @@
+.account {
+    &__details {
+        color: $black !important;
+
+        .details{
+            &__content {
+                width: 90%;
+                margin-bottom: 40px;
+                display: flex;
+                // flex-wrap: wrap;
+                border-top: $border_thickness solid $black;
+
+                &--wrap {
+                    flex-wrap: wrap;
+                }
+
+                &--success, &--danger {
+                    border: none;
+                    justify-content: center;
+                }
+
+                .content {
+                    &__success {
+                        color: $quatenary;
+                    }
+
+                    &__link {
+                        color: $black;
+                        border: $border_thickness solid $black;
+                        display: inline-block;
+                        padding: $padding_border_block;
+                        margin-left: 20px;
+                    }
+
+                    &__danger {
+                        color: $red;
+                    }
+
+                    &__list {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 60%;
+                        min-width: 300px;
+                        padding: 20px;
+
+                        &--full-width {
+                            width: 100%;
+                        }
+
+                        .list {
+                            &__graph {
+                                max-width: 800px;
+                                margin-top: 40px;
+                                
+                            }
+                            
+                            &__field {
+                                max-width: 300px;
+                                width: 100%;
+                                text-align: left;
+
+                                &--center {
+                                    text-align: center;
+                                }
+
+                                .field {
+                                    &__link {
+                                        color: $black;
+                                        border: $border_thickness solid $black;
+                                        display: inline-block;
+                                        padding: $padding_border_block;
+                                        margin-top: 20px;
+                                    }
+
+                                    &__field {
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 5px 0;
+                                        flex-wrap: wrap;
+
+                                        img {
+                                            width: $icon_small_width;
+                                            display: inline-block;
+                                            padding-right: 10px;
+                                        }
+
+                                        h3 {
+                                            display: inline-block;
+                                            padding-right: 10px;
+                                        }
+
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &__form-title {
+                        width: 40%;
+                        min-width: 200px;
+                        color: $white;
+
+                        &--top {
+                            display: none;
+                        }
+
+                        &--top-open {
+                            width: 100%;
+                            display: block;
+                        }
+
+                        &--spacing {
+                            justify-content: space-between;
+                            display: flex;
+                            flex-direction: column;
+                        }
+
+                        .form-title {
+                            &__title {
+                                background-color: $tertiary;
+                                padding: 10px;
+                                clip-path: polygon(0 0, 100% 0%, 85% 100%, 0% 100%);
+                            }
+
+                            &__desc {
+                                color: $black;
+                                padding: 10px;
+                                margin-top: 10px;
+                            }
+
+                            &__book {
+                                color: $black;
+                                border: $border_thickness solid $black;
+                                display: inline-block;
+                                padding: $padding_border_block;
+                                cursor: pointer;
+                                margin: 10px;   
+                            }
+
+                            &__form {
+                                width: 100%;
+                                text-align: center;
+                            }
+
+                            &__group {
+                                margin-top: 10px;
+                                padding: 10px;
+                                color: $black;
+                                text-align: center;
+                                display: inline-block;
+                            }
+
+                            &__label {
+                                display: block;
+                                padding: 5px;
+                            }
+
+                            &__input {
+                                border: $border_thickness solid $black;
+                                padding: $padding_border_block;
+                            }
+
+                            &__select {
+                                border: $border_thickness solid $black;
+                                background-color: $white;
+                                padding: $padding_border_block;
+                                color: $black;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    &__update-form {
+                        width: 60%;
+                        min-width: 300px;
+                        text-align: center;
+
+                        .update-form {
+                            &__group {
+                                margin: 15px 20%;
+
+                                &--col {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+        
+                                &--row {
+                                    width: 50%;
+
+                                    &:first-child {
+                                        padding-right: 5px;
+                                    }
+        
+                                    &:last-child {
+                                        padding-left: 5px;
+                                    }
+                                }
+                            }
+
+                            &__label {
+                                display: block;
+                                padding: 5px;
+                            }
+
+                            &__input {
+                                border: $border_thickness solid $black;
+                                padding: $padding_border_block;
+                                width: 100%;
+                            }
+
+                            &__select {
+                                border: $border_thickness solid $black;
+                                background-color: $white;
+                                padding: $padding_border_block;
+                                color: $black;
+                                width: 100%;
+                                cursor: pointer;
+                            }
+
+                            &__image {
+                                display: inline-block;
+                                margin: 5px;
+                                position: relative;
+
+                                img {
+                                    width: 150px;
+                                }
+
+                                .image {
+                                    &__delete {
+                                        position: absolute;
+                                        background-color: red;
+                                        color: $white;
+                                        padding: 0 10px;
+                                        border-radius: 20px;
+                                        cursor: pointer;
+                                        top: -10px;
+                                        right: -10px;
+                                    }
+                                }
+                            }
+
+
+                            &__btn {
+                                border: $border_thickness solid $black;
+                                padding: $padding_border_block;
+                                background-color: $white;
+                                cursor: pointer;
+                            }
+
+                            &__error {
+                                color: $red;
+
+                                &--d-none {
+                                    display: none;
+                                }
+                            }
+
+                            &__icon {
+                                width: $icon_medium_width;
+                                margin: 5px;
+                                padding: 5px;
+                                border: $border_thickness solid transparent;
+                                border-radius: 40px;
+                                display: inline-block;
+                                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+                                cursor: pointer;
+                                // background-color: $tertiary;
+
+                                &--selected {
+                                    background-color: $tertiary;
+                                    border-color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: $max_width_primary) {
+    .account {
+        &__details {
+            .details {
+                &__content {
+                    flex-wrap: wrap;
+
+                    .content {
+                        &__form-title {
+                            width: 100%;
+
+                            &--side {
+                                display: none;
+                            }
+
+                            &--top {
+                                display: block;
+                            }
+                        }
+
+                        &__update-form {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_tertiary) {
+    .account {
+        &__details {
+            .details {
+                &__content {
+                    width: 100%;
+
+                    .content {
+                        &__update-form {
+                            .update-form {
+                                &__group {
+                                    margin: 10px 10%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

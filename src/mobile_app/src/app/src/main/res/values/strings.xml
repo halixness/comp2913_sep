@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name" translatable="false">The Edgy</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_activities" translatable="false">Activities</string>
+    <string name="title_venues" translatable="false">Venues</string>
+    <string name="title_profile" translatable="false">Profile</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="prompt_for_register">Don\'t have an account?</string>
+    <string name="action_register">Register.</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="buy_membership">"Buy membership"</string>
+    <string name="show_venues">"Show venues"</string>
+    <string name="show_activities">"Show activities"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
+

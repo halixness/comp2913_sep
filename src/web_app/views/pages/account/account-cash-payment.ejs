@@ -1,0 +1,233 @@
+
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <div class="account account--background">
+        <%- include('../../partials/account-side-bar') %>
+
+        <div class="account__section account__section--no-margin">
+            <div class="account__section account__section--full-width account__section--no-margin-bottom account__details">
+
+                <div class="section__title">
+                    <h2>Cash payment</h2>
+                </div>
+
+                <% if(locals.error){ %>
+                    <% for (var i = 0; i < error.length;  i++ ) { %>
+                        <% if(error[i].path == 'success'){ %>                                    
+                            <div class="details__content details__content--success">
+                                <h2 class="content__success"><%- error[i].message %></h2>
+
+                                <div class="content__link hvr-sweep-to-right">
+                                    <a href="/user/account/payment/cash/receipt?payment_id=<%-error[i].payment_id%>" target="_blank">
+                                        <h3>Show Reciept</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% }%>
+
+
+
+                <% if(locals.error){ %>
+                    <% for (var i = 0; i < error.length;  i++ ) { %>
+                        <% if(error[i].path == 'unsuccessful'){ %>                                    
+                            <div class="details__content details__content--danger">
+                                <h2 class="content__danger"><%- error[i].message %></h2>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% }%>
+
+
+                <div class="details__content">
+                    <div class="content__form-title content__form-title--top">
+                        <div class="form-title__title">
+                            <h2>New Activity</h2>
+                        </div>
+
+                        <div class="form-title__desc">
+                            Ensure their details are correct as these will be used for them to log in
+                        </div>
+                    </div>
+
+                    <form class="content__update-form" method="POST" action="" autocomplete="off">
+                        <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+        
+                        <div class="update-form__group">
+                            <label class="update-form__label"><h3>Activity</h3></label>
+
+                            <select id="activity_id" class="update-form__select" name="activity_id">
+                                <% for (var i = 0; i < activities.length; i++) { %>
+                                    <% if(activities[i].id == form.activity_id) {%>
+                                        <option value="<%- activities[i].id %>" selected><%- activities[i].name %> - £<%- activities[i].cost %></option>
+                                    <%  } else { %>
+                                        <option value="<%- activities[i].id %>"><%- activities[i].name %> - £<%- activities[i].cost %></option>
+                                    <% } %>
+                                <% } %>
+                            </select>
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'activity_id'){ %>   
+                                        <p id="activity_id-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="update-form__group">
+                            <label class="update-form__label"><h3>Amount Paid (£)</h3></label>
+                            <input id="amount" class="update-form__input" name="amount" type="text" placeholder="00.00" value="<%- form.amount %>">
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'amount'){ %>   
+                                        <p id="amount-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="update-form__group">
+                            <label class="update-form__label"><h3>User E-mail</h3></label>
+                            <input id="usr_email" class="update-form__input" name="email" type="text" placeholder="E-mail"  value="<%- form.email %>">
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'email'){ %>   
+                                        <p id="usr_email-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="update-form__group">
+                            <button class="update-form__btn hvr-sweep-to-right" type="submit"><h3>Confirm</h3></button>
+                        </div>
+
+                    </form>
+
+
+                    <div class="content__form-title content__form-title--side">
+                        <div class="form-title__title">
+                            <h2>Cash Payment</h2>
+                        </div>
+
+                        <div class="form-title__desc">
+                            Create a new booking and accept a cash payment.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <% if (payments.length > 0) { %>
+                <div class="account__section account__section--full-width account__section--no-margin-top account__details">
+
+                    <div class="section__title">
+                        <h2>Cash payment History</h2>
+                    </div>
+
+
+                    <% for(var i = 0; i < payments.length; i++) { %>
+
+                        <div class="details__content">
+                            <div class="content__form-title content__form-title--top">
+                                <div class="form-title__title">
+                                    <h2>Payment No. <%- payments[i].id %></h2>
+                                </div>
+                
+                                <div class="form-title__desc">
+                                    <%- payments[i].activity_name %>
+                                </div>
+
+                                <div class="form-title__book hvr-sweep-to-right">
+                                    <a href="/user/account/payment/cash/receipt?payment_id=<%-payments[i].id%>" target="_blank">
+                                        <h3>Show Reciept</h3>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="content__list">
+                                <div class="list__field">
+                                    <div class="field__field">
+                                        <img src="/img/icons/clock.png" />
+                                        <h3>Purchase Date:</h3>
+                                        <span><%- payments[i].purchase_date %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/icons/discount.png" />
+                                        <h3>Amount Cost:</h3>
+                                        <span>£<%- payments[i].activity_cost %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/icons/pay.png" />
+                                        <h3>Amount Paid:</h3>
+                                        <span>£<%- payments[i].amount %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/account/account-black.png" />
+                                        <h3>purchaser:</h3>
+                                        <span><%- payments[i].user_name %> <%- payments[i].user_surname %>: <%- payments[i].user_email %></span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+
+                            <div class="content__form-title content__form-title--side">
+                                <div class="form-title__title">
+                                    <h2>Payment No. <%- payments[i].id %></h2>
+
+                                </div>
+                
+                                <div class="form-title__desc">
+                                    <%- payments[i].activity_name %>
+                                </div>
+
+                                <div class="form-title__book hvr-sweep-to-right">
+                                    <a href="/user/account/payment/cash/receipt?payment_id=<%-payments[i].id%>" target="_blank">
+                                        <h3>Show Reciept</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>
+
+
+<style>
+    #receipt_modal {
+        z-index: 9;
+        position:fixed;
+        height: 100%;
+        width: 100%;
+    }
+    #receipt_pdf {
+        height: 80%;
+        width: 40%;
+        min-height: 600px;
+        min-width: 400px;
+        display: block;
+        position: relative;
+        margin: auto;
+        margin-top: 5%;
+    }
+</style>
+

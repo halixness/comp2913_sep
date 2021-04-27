@@ -1,0 +1,223 @@
+// Memberships page styling
+
+.pricing-table {
+    padding: $padding_main_section;
+    
+    &__container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+
+    &__header {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: $padding_border_block;
+        margin-top: 20px;
+        text-align: center;
+        color: $black;
+
+    }
+
+    &__option {
+        width: 27%;
+        min-width: 400px;
+        
+
+        .option {
+            &__content {
+                margin: 40px 20px;
+                border: $border_thickness solid $black;
+                padding: 30px 20px;
+                background-color: $white;
+                color: $black;
+                // background-color: $quatenary;
+                
+
+                .content {
+                    &__membership-plan {
+                        text-align: center;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+
+                    &__membership-desc {
+                        margin: 40px 20px;
+                        padding: 0 20px;
+                    }
+
+                    &__membership-price {
+                        text-align: center;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        margin: 40px 0;
+                    }
+
+                    &__membership-join {
+                        text-align: center;
+
+                        .join {
+                            &__link {
+                                border: $border_thickness solid $black;
+                                padding: $padding_border_block;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &--focus {
+            border: $border_thickness solid $tertiary;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.9);
+
+            .option {
+                &__content {
+                    margin: 0;
+                    border: none;
+
+                    .content {
+                        &__image {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            img {
+                                width: $icon_default_width;
+                            }
+                        }
+
+                        &__membership-plan {
+                            margin-top: 20px;
+                        }
+                        
+                        &__membership-desc {
+                            padding: 0 40px;
+                        }
+
+                       
+                    }
+                }
+            }
+        }
+    }
+}
+
+.statistics {
+    background-color: $primary;
+    clip-path: polygon(100% 0, 100% 76%, 0 100%, 0 24%);
+    padding: 40px;
+    color: $white;
+
+    &__container {
+        margin: 100px 60px;
+    }
+
+    &__header {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: $padding_border_block;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+
+
+        .content {
+            &__statistic {
+                width: 33%;
+                min-width: 200px;
+
+                .statistic {
+                    &__image {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            width: $icon_default_width;
+                        }
+                    }
+
+                    &__desc {
+                        margin: 20px 40px;
+                  
+                        &--center {
+                            text-align: center;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_primary) {
+    .pricing-table {
+        &__option {
+            width: 60%;
+        }
+    }
+
+    .statistics {
+        clip-path: polygon(100% 0, 100% 80%, 0 100%, 0 20%);
+
+        &__container {
+            margin: 100px 10px;
+        }
+
+        &__content {
+            .content {
+                &__statistic {
+                    .statistic {
+                        &__desc {
+                            margin: 20px 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_secondary) {
+    .pricing-table {
+        &__option {
+            min-width: 0;
+            width: 80%;
+        }
+    }
+
+    .statistics {
+        clip-path: polygon(100% 0, 100% 90%, 0 100%, 0 10%);
+
+    }
+}
+
+@media only screen and (max-width: $max_width_tertiary) {
+    .pricing-table {
+        &__option {
+            width: 90%;
+
+            .option {
+                &__content {
+                    .content {
+                        &__membership-desc {
+                            padding: 10px 0;
+                            margin: 30px 20px 20px 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}   

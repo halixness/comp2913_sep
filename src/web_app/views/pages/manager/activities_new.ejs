@@ -1,0 +1,365 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+
+<div class="modal modal--delete">
+    <div class="modal__container">
+        <div class="modal__header modal__header--danger">
+            <h2>Delete Activity?</h2>
+            <div class="header__close modal--close">
+                <img src="/img/icons/close-white.png" />
+            </div>
+        </div>
+
+        <div class="modal__content">
+            Are You sure You want to Proceed?
+        </div>
+
+        <div class="modal__close">
+            <a href="###" id="delete-activity" class="close__close hvr-sweep-to-right modal--close">
+                <h3>Delete Activity</h3>
+            </a>
+            
+            <div class="close__close hvr-sweep-to-right modal--close">
+                <h3>Close</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="account account--background">
+        <%- include('../../partials/manager-side-bar') %>
+
+        <div class="account__section-container">
+
+            <div class="breadcrumbs">
+                <div class="breadcrumbs__selector">
+                    <div class="selector__item selector__item--selected" target="add-new">
+                        <h3>Add New Activity</h3>
+                    </div>
+        
+
+                    <% if(locals.activities.length > 0) { %>
+                        <div class="selector__item" target="configure">
+                            <h3>Configure Activities</h3>
+                        </div>
+                    <% } %> 
+                </div>
+            </div>
+
+
+            <div class="account__section account__section--full-width account__details" id="add-new">
+                <div class="section__title">
+                    <h2>Add a new Activity</h2>
+                </div>
+
+                <% if(locals.error){ %>
+                    <% for (var i = 0; i < error.length;  i++ ) { %>
+                        <% if(error[i].path == 'success'){ %>                                    
+                            <div class="details__content details__content--success">
+                                <h2 class="content__success"><%- error[i].message %></h2>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% }%>
+
+                
+                <% if(locals.error){ %>
+                    <% for (var i = 0; i < error.length;  i++ ) { %>
+                        <% if(error[i].path == 'unsuccessful'){ %>                                    
+                            <div class="details__content details__content--danger">
+                                <h2 class="content__danger"><%- error[i].message %></h2>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% }%>
+
+
+                <div class="details__content">
+                    <div class="content__form-title content__form-title--top">
+                        <div class="form-title__title">
+                            <h2>New Activity</h2>
+                        </div>
+
+                        <div class="form-title__desc">
+                            Ensure their details are correct as these will be used for them to log in
+                        </div>
+                    </div>
+
+                    <% if(facilities.length > 0) { %>
+                        <form class="content__update-form" action="?_csrf=<%- csrfToken %>" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Name</h3></label>
+                                <input id="name" class="update-form__input" name="name" type="text" placeholder="Name" value="<%- form.name %>">
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'name'){ %>
+                                            <p id="name-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+            
+                            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Description</h3></label>
+                                <textarea id="description" class="update-form__input" name="description" placeholder="Description"><%- form.description %></textarea>
+
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'description'){ %>
+                                            <p id="description-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+
+
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Price</h3></label>
+                                <input id="cost" class="update-form__input" name="cost" type="text" placeholder="Price" value="<%- form.cost %>">
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'cost'){ %>
+                                            <p id="cost-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            
+                            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Discount <small>(optional)</small></h3></label>
+                                <div style="padding-bottom: 5px; font-size: 14px;">No discount = free for members, else discount (£) reduced from price</div>   
+                                <input id="discount" class="update-form__input" name="discount" type="text" placeholder="Discount" value="<%- form.discount %>">
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'discount'){ %>
+                                            <p id="discount-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            
+                            
+                            <div class="update-form__group update-form__group--col">
+                                <div class="update-form__group--row">
+                                    <label class="update-form__label"><h3>Start Date</h3></label>
+                                    <input id="date" class="update-form__input" name="date" type="date" placeholder="Start Date" value="<%- form.date %>">
+
+                                    <% if(locals.error){ %>
+                                        <% for (var i =0; i < error.length;  i++ ) { %>
+                                            <% if(error[i].path == 'date'){ %>
+                                                <p id="date-error" class="update-form__error"><%- error[i].message %></p>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+
+                                <div class="update-form__group--row">
+                                    <label class="update-form__label"><h3>Start Time</h3></label>
+                                    <input id="time" class="update-form__input" name="time" type="time" placeholder="Start Time" value="<%- form.time %>">
+
+                                    <% if(locals.error){ %>
+                                        <% for (var i =0; i < error.length;  i++ ) { %>
+                                            <% if(error[i].path == 'time'){ %>
+                                                <p id="time-error" class="update-form__error"><%- error[i].message %></p>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+
+                                
+                            </div>
+                            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Duration <small>(minutes)</small></h3></label>
+                                <input id="duration" class="update-form__input" name="duration" type="text" placeholder="Duration" value="<%- form.duration %>">
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'duration'){ %>
+                                            <p id="duration-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Sport</h3></label>
+
+                                <select id="id_sport" class="update-form__select" name="id_sport" value="<%- form.id_sport %>">
+                                    <% for (var i = 0; i < sports.length; i++) { %>
+                                        <option value="<%- sports[i].id %>"><%- sports[i].name %></option>
+                                    <% } %>
+                                </select>
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'id_sport'){ %>
+                                            <p id="id_sport-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Facility</h3></label>
+
+                                <select id="id_facility" class="update-form__select" name="id_facility" value="<%- form.id_facility %>">
+                                    <% for (var i = 0; i < facilities.length;  i++ ) { %>
+                                        <option value="<%- facilities[i].id %>"><%- facilities[i].name %></option>
+                                    <% } %>
+                                </select>
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'id_facility'){ %>
+                                            <p id="id_facility-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            
+                            <div class="update-form__group">
+                                <label class="update-form__label"><h3>Image(s) <small>(optional)</small></h3></label>
+                                <input id="image" type="file" name="image" multiple>
+
+                                <% if(locals.error){ %>
+                                    <% for (var i =0; i < error.length;  i++ ) { %>
+                                        <% if(error[i].path == 'image'){ %>
+                                            <p id="image-error" class="update-form__error"><%- error[i].message %></p>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+            
+                            <div class="update-form__group">
+                                <button class="update-form__btn hvr-sweep-to-right" type="submit"><h3>Add</h3></button>
+                            </div>
+                        </form>
+
+                    <% } else { %>
+                        <div class="content__list">
+                            <div class="list__field list__field--center">
+                                <h3>There are currently no facilities to add activities to!</h3>
+
+                                <div class="field__link hvr-sweep-to-right">
+                                    <a href="/manager/facilities/new">
+                                        <h3>Create Facilities</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+
+                    <div class="content__form-title content__form-title--side">
+                        <div class="form-title__title">
+                            <h2>New Activity</h2>
+                        </div>
+
+                        <div class="form-title__desc">
+                            Ensure their details are correct as these will be used for them to log in
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% if(locals.activities.length > 0) { %>
+                <div class="account__section account__section--full-width account__section--d-none  account__details" id="configure">
+                    <div class="section__title">
+                        <h2>Configure Activities</h2>
+                    </div>
+
+                    <% for (var i = 0; i < activities.length; i++) { %>
+                        <div class="details__content">
+                            <div class="content__form-title content__form-title--top">
+                                <div class="form-title__title">
+                                    <h2><%- activities[i].name %></h2>
+                                </div>
+    
+                                <div class="form-title__book hvr-sweep-to-right">
+                                    <a href="/manager/activities/edit/<%- activities[i].id %>">
+                                        <h3>Edit</h3>
+                                    </a>
+                                </div>
+
+                                <div id="<%- activities[i].id %>" class="form-title__book hvr-sweep-to-right form-title__book--delete-activity modal--open-delete">
+                                    <h3>Delete</h3>
+                                </div>
+                            </div>
+
+                            <div class="content__list">
+                                <div class="list__field">
+                                    <div class="field__field">
+                                        <img src="/img/icons/discount.png" />
+                                        <h3>Price:</h3>
+                                        <span >£<%- activities[i].cost %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/icons/clock.png" />
+                                        <h3>Time:</h3>
+                                        <span><%- activities[i].start_time %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/icons/timer.png" />
+                                        <h3>Duration:</h3>
+                                        <span ><%- activities[i].duration %> Minutes </span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/icons/gym.png" />
+                                        <h3>Activity:</h3>
+                                        <span><%- activities[i].name_sport %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/account/location-black.png" />
+                                        <h3>Location:</h3>
+                                        <span><%- activities[i].facility_name %></span>
+                                    </div>
+
+                                    <div class="field__field">
+                                        <img src="/img/icons/arrow.png" />
+                                        <h3>Description:</h3>
+                                        <span ><%- activities[i].description %></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content__form-title content__form-title--side">
+                                <div class="form-title__title">
+                                    <h2><%- activities[i].name %></h2>
+                                </div>
+    
+                                <div class="form-title__book hvr-sweep-to-right">
+                                    <a href="/manager/activities/edit/<%- activities[i].id %>">
+                                        <h3>Edit</h3>
+                                    </a>
+                                </div>
+
+                                <div id="<%- activities[i].id %>" class="form-title__book hvr-sweep-to-right form-title__book--delete-activity modal--open-delete">
+                                    <h3>Delete</h3>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>    
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>

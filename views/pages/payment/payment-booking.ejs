@@ -1,0 +1,416 @@
+<%- include('../../partials/head') %>
+
+<div class="modal modal--modal">
+  <div class="modal__container">
+    <div class="modal__header">
+        <h2>Add Payment Method</h2>
+        <div class="header__close modal--close">
+            <img src="/img/icons/close.png" />
+        </div>
+    </div>
+    
+    <form class="modal__form sr-payment-form" action="/user/account/add/card" method="POST" autocomplete="off" id="payment-form">
+      <div class="modal__content">
+        <div class="sr-root">
+          <div class="sr-main">
+            <form id="payment-form payment" class="sr-payment-form">
+              <div class="sr-combo-inputs-row payment__input">
+                  <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                  <div class="sr-input sr-card-element" id="card-element"></div>
+              </div>
+
+              <div class="sr-field-error  payment__error" id="card-errors" role="alert"></div>
+
+              <div class="payment__inline">
+                  <button id="submit" class="payment__submit hvr-sweep-to-right">
+                      <!-- <div class="spinner hidden" id="spinner"></div> -->
+                      <h3 id="button-text">Add Card</h3><span id="order-amount"></span>
+                  </button>
+
+                  <img src="/img/elements/loader.gif" class="payment__spinner payment__spinner--card payment__spinner--hidden" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>  
+</div>
+
+<div class="modal modal--delete">
+  <div class="modal__container">
+    <div class="modal__header modal__header--danger">
+      <h2>Confirm the payment</h2>
+      <div class="header__close modal--close">
+        <img src="/img/icons/close-white.png" />
+      </div>
+    </div>
+
+    <div class="modal__content">
+      Are you sure you want to proceed?
+
+      <div class="sr-root">
+        <div class="sr-main">
+          <form id="submit-form" class="sr-payment-form">
+            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+
+            <div class="sr-field-error-payment payment__error" id="payment-errors" role="alert"></div>
+
+            <div class="payment__inline">
+              <button id="submit-payment" class="payment__submit hvr-sweep-to-right">
+                <h3 id="button-text">Confirm Payment</h3><span id="order-amount"></span>
+              </button>
+
+              <img src="/img/elements/loader.gif" class="payment__spinner payment__spinner--payment payment__spinner--hidden" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container container--full-height">
+  <div class="page-title">
+    <div class="page-title__header">
+        <h2>New Booking</h2>
+    </div>
+  </div>
+
+  <div class="payment">
+    <div class="payment__half payment__order">
+      <div class="half__container">
+
+        <div class="half__title">
+          <h3>Complete your booking</h3>
+        </div>
+
+        
+        <% if (page == 2) { %>
+          <div id="slide-1" class="half__slide--d-none">
+        <% } else { %>
+          <div id="slide-1">
+        <% } %>
+
+          <div class="order__select">
+            <div class="select__group">
+              <label class="select__label"><h3>Activity</h3></label>
+            </div>
+          </div>
+
+
+          <div class="order__details">
+            <div class="details__card details__card--selectable" id="order-select">
+              <div class="card__title">
+                <img src="/img/icons/basketball-white.png" />
+                <h3 id="item-title"><%- activity.name %> - <%- activity.name_sport %></h3>
+              </div>
+
+              <div class="card__content">
+                <div class="content__content">
+                  <div class="content__type">
+                    <img src="/img/account/calendar.png" />
+                    <h3>Description</h3>
+                  </div>
+
+                  <%- activity.description %>
+                </div>
+
+
+                <div class="content__content">
+                  <div class="content__type">
+                    <img src="/img/account/location.png" />
+                    <h3>Location</h3>
+                  </div>
+
+                  <%- activity.facility_name %>
+                </div>
+              
+
+                <div class="content__content">
+                  <div class="content__type">
+                    <img src="/img/icons/clock-white.png" />
+                    <h3>Start Time</h3>
+                  </div>
+
+                  <%- activity.start_time %> - <%- activity.end_time.substr(activity.end_time.length - 8) %>
+                </div>
+
+                <div class="content__content">
+                  <div class="content__type">
+                    <img src="/img/icons/pay-white.png" />
+                    <h3>Price</h3>
+                  </div>
+
+
+                  <% if (activity.cost != activity.original_cost) { %>
+                    <p>£<%- activity.original_cost %> unit price</p>
+                    <p>- £<%- activity.discount %> members discount</p>
+                    <p>Total at <%- activity.cost %> members fee</p>
+                  <% } else { %>
+                    £<%- activity.cost %> non-members fee
+                  <% } %>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="details__inline">
+              <div class="inline__button inline__button--next hvr-sweep-to-right inline__button--d-none" id="booking-next">
+                <h3>Next</h3>
+              </div>
+  
+              <button type="button" disabled class="inline__button inline__button--disabled">
+                <h3>Next</h3>
+              </button>
+            </div>
+          </div>
+
+          
+        </div>
+
+
+        <% if (page == 2) { %>
+          <div id="slide-2">
+        <% } else { %>
+          <div id="slide-2" class="half__slide--d-none">
+        <% } %>
+
+          <div class="order__current">
+            <table class="current__option">
+              <tbody>
+                <tr>
+                  <td>Activity</td>
+                  <td><%- activity.name %></td>
+                  <td class="option__edit edit__slide" target_slide="1">Edit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="order__select">
+            <div class="select__group">
+              <label class="select__label"><h3>Payment Method</h3></label>
+
+              <% if(locals.cards && locals.cards.length > 0){ %>
+                <select name="card" class="select__select payment__card">
+                  <% for (var i = 0; i < cards.length;  i++ ) { %>
+                    <% if(cards[i].type != "__CASH__" ) { %> 
+                      <option value="<%- cards[i].id %>"><%- cards[i].type %> ending in <%- cards[i].number %></option>
+                    <% } %>
+                  <% } %>
+                <select>
+              <% } %>
+            </div>
+          </div>
+
+
+          <div class="order__details">
+            <% if (!locals.cards || locals.cards.length <= 0) { %>
+              <div class="details__card">
+                No Payment Methods Available
+              </div>
+            <% } else { %>
+
+              <div class="details__card details__card--d-none details__card--empty" id="card-error">
+                No Card Selected
+              </div>
+
+              <div class="details__card details__card--selectable" id="card-select">
+                <div class="card__title">
+                  <img src="/img/icons/confirm-white.png" />
+                  <h3 id="card-title">Payment Method</h3>
+                </div>
+
+
+                <div class="card__content">
+                  <div class="content__content">
+                    <div class="content__type">
+                      <img src="/img/icons/pay-white.png" />
+                      <h3>Type</h3> 
+                    </div>
+
+                    <div id="card-type">
+                      <%- cards[0].type %> ending in <%- cards[0].number %>
+                    </div>
+                  </div>
+
+                  <div class="content__content">
+                    <div class="content__type">
+                      <img src="/img/account/calendar.png" />
+                      <h3>Expire Date</h3> 
+                    </div>
+
+                    <div id="card-expire">
+                      <%- cards[0].expire_date %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+
+            <div class="details__inline">
+              <div class="inline__button hvr-sweep-to-right modal--open">
+                <h3>Add New Payment Method</h3>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    
+    <div class="payment__half payment__total">
+      <div class="half__title">
+        <h3>Order Total</h3>
+      </div>
+
+      <% if (page == 2) { %>
+        <div class="total__total total__total--default total__total--d-none">
+      <% } else { %>
+        <div class="total__total total__total--default">
+      <% } %>
+        No Activity Selected
+      </div>
+
+      <% if (page == 2) { %>
+        <div class="total__total total__total--order" id="order-total">
+      <% } else { %>
+        <div class="total__total total__total--order total__total--d-none" id="order-total">
+      <% } %>
+        £<%- activity.cost %> per unit
+      </div>
+
+      <% if (page == 2) { %>
+        <div class="total__content">
+      <% } else { %>
+        <div class="total__content total__content--d-none">
+      <% } %>
+
+
+        <div class="content__order">
+          <h3>Activity</h3>
+
+          <%- activity.name %> - <%- activity.name_sport %>
+        </div>
+
+        <div class="content__order">
+          <h3>Cost</h3>
+
+          £<%- activity.original_cost %>
+        </div>
+
+        <% if (activity.cost != activity.original_cost) { %>
+          <div class="content__order">
+            <h3>Savings</h3>
+
+            £<%- activity.discount %> members discount
+          </div>
+        <% } %>
+      </div>
+
+      <div class="total__payment total__payment--d-none">
+        <h3>Payment</h3>
+
+        <div id="order-payment">
+          <% if(locals.cards && locals.cards.length > 0){ %>
+            <%- cards[0].type %> ending in <%- cards[0].number %>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="total__pay total__pay--d-none">
+        <div class="pay__submit hvr-sweep-to-right modal--open-delete">
+          <h3>Pay Now</h3>
+        </div>
+      </div>
+
+      <div class="total__cancel">
+        <a href="/activities" class="cancel__submit hvr-sweep-to-right">
+          <h3>Cancel Booking</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 
+<div class="sr-main">
+  <div class="account__section account__section--full-width account__overview">
+    <div class="section__title">
+        <h2>Your Payment Methods: </h2>
+    </div>
+
+    <% if(locals.cards && locals.cards.length > 0){ %>
+      <% for (var i = 0; i < cards.length;  i++ ) { %>
+        <% if(cards[i].type != "__CASH__" ) { %> 
+          <div class="overview__option hvr-float">
+            <div class="option__content option__content--center option__content--yellow">
+              <div class="content__title content__title--margin-bottom">
+                <h2><%- cards[i].type %> Credit Card</h2>
+                <h3>ending in <%- cards[i].number %></h3>
+              </div>
+
+              <div class="content__dsc content__dsc--flex">       
+                <div class="content__field">
+                  <div class="field__field">
+                    <img src="/img/account/calendar-black.png" />
+                    <h3>Expire Date:</h3>
+                    <%- cards[i].expire_date %>
+                  </div>
+
+                  <div class="field__field">
+                    <img src="/img/icons/pay.png" />
+                    <h3>Type:</h3>
+                    <%- cards[i].type %>
+                  </div>
+                </div>      
+              </div>
+
+              <div class="content__inline content__inline--right">
+                <div id="<%- cards[i].id %>" class="content__explore content__explore--black hvr-sweep-to-right hvr-sweep-to-right--white content__explore--delete-payment modal--open-delete">
+                  <a href="###?card=<%- cards[i].id %>">
+                    <h3>Select Card</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      <% } %>
+
+      <% } else { %>
+        <div class="section__not-found">
+          <div class="not-found__image">
+              <img src="/img/icons/sadface.jpg" />
+          </div>
+            <h2>No Payment Methods Found</h2>
+        </div>
+      <% } %>
+
+      <div class="payment-history__option">
+        <button class="payment-history__button hvr-sweep-to-right modal--open">
+          <h3>Add Payment Method</h3>
+        </button>
+    </div>  
+  </div>
+
+</div> -->
+
+
+
+
+<!-- Stripe Payment -->
+<script src="https://js.stripe.com/v3/" defer></script>
+<script src="/js/addCard.js" defer></script>
+<script src="/js/paymentForm.js" defer></script>
+<script type="text/javascript" src="/js/pageFunctions.js" defer></script>
+<script type="text/javascript" src="/js/paymentMethod.js" defer></script>
+<%- include('../../partials/foot') %>
+

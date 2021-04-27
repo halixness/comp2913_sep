@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+
+    <body>
+        <img src="cid:logo"/>
+        
+
+        <% if (locals.details){ %>
+            <h1>Reference #<%=details.id%>: payment confirmed</h1>
+            <h2>Paid £<%=details.price%> with <%=details.card%></h2>
+            <p><%=details.name%>. <%=details.description%></p>
+            <p>Validation QR code:</p>
+            <image src="<%=details.qr%>">
+        <% } %>
+    </body>
+</html>

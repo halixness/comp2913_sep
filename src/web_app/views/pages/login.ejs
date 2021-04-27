@@ -1,0 +1,228 @@
+<%- include('../partials/head') %>
+
+<div class="container container--full-height">
+
+    <div class="login">
+        <div class="login__half login__half--form login__half--login">
+            <div class="half__divider">
+                <div class="half__login-icon">
+                    <img src="/img/icons/user.png" />
+                </div>
+
+                <div class="half__login-header">
+                    <h2>Login</h2>
+                </div>
+
+                <form class="half__login-form" method="POST" action="/user/login">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+
+                    <% if(locals.error){ %>
+                        <% for (var i =0; i < error.length;  i++ ) { %>
+                            <% if(error[i].path == 'unsuccessful'){ %>
+                                <p id="unsuccessful-error" class="login-form__error"><%- error[i].message %></p>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+
+                    <div class="login-form__group">
+                        <label class="login-form__label"><h3>Email</h3></label>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'email'){ %>
+                                    <input class="login-form__input login-form__input--error wobble-horizontal" name="email" type="text" placeholder="E-mail" value="<%-form.email %>"/>
+                                    <p class="login-form__error"><%- error[i].message %></p>
+                                <% }else{ %>
+                                    <input class="login-form__input " name="email" type="text" placeholder="E-mail" value="<%-form.email %>"/>
+                                <% } %>
+                            <% } %>
+                        <% }else{ %>
+                            <input class="login-form__input " name="email" type="text" placeholder="E-mail" value="<%-form.email %>"/>
+                        <% }%>
+                    </div>
+                    
+                    <div class="login-form__group">
+                        <label class="login-form__label"><h3>Password</h3></label>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'password'){ %>
+                                    <input class="login-form__input login-form__input--error wobble-horizontal" name="password" type="password" placeholder="Password"/>
+                                    <p class="login-form__error"><%- error[i].message %></p>
+                                <% }else{ %>
+                                    <input class="login-form__input" name="password" type="password" placeholder="Password"/>
+                                <% } %>
+                            <% } %>
+                        <% }else{ %>
+                            <input class="login-form__input" name="password" type="password" placeholder="Password"/>
+                        <% } %>
+                    </div>
+                    
+                    <div class="login-form__group">
+                        <button class="login-form__btn hvr-sweep-to-right" type="submit" ><h3>Login</h3></button>
+                    </div>  
+                </form>
+
+                <div class="half__bottom-link half__bottom-link--transition">
+                    Don't have an account? <span class="bottom-link__link">Create one here</span>
+                </div>
+
+                <div class="half__bottom-link">
+                    <a class="bottom-link__link" href="/home">Back to The Edgy</a> <!-- Return to the previously visited page -->
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="login__half login__half--background">
+            <div class="half__divider">
+                <div class="half__form-transition-header hvr-sweep-to-right">
+                    <a href="#"><h2 class="form-transition-header__text">Register</h2></a>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="login__half login__half--form login__half--register">
+            <div class="half__divider">
+                <div class="half__login-icon">
+                    <img src="/img/icons/register.png" />
+                </div>
+    
+                <div class="half__login-header">
+                    <h2>Register</h2>
+                </div>
+
+                <div id="slide-1">
+                    <form id="form-1" class="half__login-form" method="POST">
+                        <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                        <input type="hidden" name="type" value="1" />
+
+                        <div class="login-form__group login-form__group--col">
+                            <div class="login-form__group--row">
+                                <label class="login-form__label"><h3>Firstname</h3></label>
+                                <input id="name" class="login-form__input" name="name" type="text" placeholder="Name" />
+                                <p id="name-error" class="login-form__error login-form__error--d-none"></p>
+                            </div>
+
+                            <div class="login-form__group--row">
+                                <label class="login-form__label"><h3>Surname</h3></label>
+                                <input id="surname" class="login-form__input" name="surname" type="text" placeholder="Surname" />
+                                <p id="surname-error" class="login-form__error login-form__error--d-none"></p>
+                            </div>
+                        </div>
+
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Email</h3></label>
+                            <input id="email" class="login-form__input" name="email" type="text" placeholder="E-mail"/>
+                            <p id="email-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+                        
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Password</h3></label>
+                            <input id="password" class="login-form__input" name="password" type="password" placeholder="Password"/>
+                            <p id="password-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Confirm Password</h3></label>
+                            <input id="confirm_password" class="login-form__input" name="confirm_password" type="password" placeholder="Confirm Password"/>
+                            <p id="confirm_password-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+                        
+                        <div class="login-form__group">
+                            <button class="login-form__btn hvr-sweep-to-right" type="submit"><h3>Next</h3></button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="slide-2" class="half__slide--d-none">
+                    <form id="form-2" class="half__login-form" method="POST">
+                        <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Date of Birth</h3></label>
+                            <input id="birth" class="login-form__input" name="birth" type="date" placeholder="Date of Birth"/>
+                            <p id="birth-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+        
+        
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Phone Number</h3></label>
+                            <input id="phone" class="login-form__input" name="phone" type="text" placeholder="Phone" />
+                            <p id="phone-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+
+                        <div class="login-form__group">
+                            <button class="login-form__btn login-form__btn--return hvr-sweep-to-right" type="button"><h3>Back</h3></button>
+                            <button class="login-form__btn hvr-sweep-to-right" type="submit"><h3>Next</h3></button>
+                        </div>
+                    </form> 
+                </div>
+
+
+                <div id="slide-3" class="half__slide--d-none">
+                    <form id="form-3" class="half__login-form" method="POST">
+                        <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                        
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Address Line 1</h3></label>
+                            <input id="address_1" class="login-form__input" name="address_1" type="text" placeholder="Address Line 1"/>
+                            <p id="address_1-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+        
+        
+                        <div class="login-form__group">
+                            <label class="login-form__label"><h3>Address Line 2 <small>(optional)</small></h3></label>
+                            <input id="address_2" class="login-form__input" name="address_2" type="text" placeholder="Address Line 2"/>
+                            <p id="address_2-error" class="login-form__error login-form__error--d-none"></p>
+                        </div>
+        
+        
+                        
+                        <div class="login-form__group login-form__group--col">
+                            <div class="login-form__group--row">
+                                <label class="login-form__label"><h3>City</h3></label>
+                                <input id="city" class="login-form__input" name="city" type="text" placeholder="City"/>
+                                <p id="city-error" class="login-form__error login-form__error--d-none"></p>
+                            </div>
+
+                            <div class="login-form__group--row">
+                                <label class="login-form__label"><h3>Postal / Zip Code</h3></label>
+                                <input id="zipcode" class="login-form__input" name="zipcode" type="text" placeholder="Zip Code"/>
+                                <p id="zipcode-error" class="login-form__error login-form__error--d-none"></p>
+                            </div>
+                        </div>
+
+                        <div class="login-form__group">
+                            <input  type="submit" style="position: absolute; width: 1px; height: 1px; left: -9999px;" tabindex="-1"/>
+                        </div>
+                    </form>
+
+                    <form id="form-4" class="half__login-form">
+                        <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                        
+                        <div class="login-form__group">
+                            <button class="login-form__btn login-form__btn--return hvr-sweep-to-right" type="button"><h3>Back</h3></button>
+                            <button class="login-form__btn hvr-sweep-to-right" type="submit"><h3>Register</h3></button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="half__bottom-link half__bottom-link--transition">
+                    Already have an Account? <span class="bottom-link__link">Login Here</span>
+                </div>
+
+                <div class="half__bottom-link">
+                    <a class="bottom-link__link"  href="/home">Back to The Edgy</a> <!-- Return to the previously visited page -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/pageFunctions.js" defer></script>
+<script type="text/javascript" src="/js/registration.js" defer></script>
+
+<%- include('../partials/foot') %>
+

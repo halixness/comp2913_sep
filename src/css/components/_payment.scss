@@ -1,0 +1,294 @@
+//  Payment page stye sheet
+
+.payment {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+
+    &__half {
+        width: 50%; // Default width
+        padding: 40px;
+        color: $black;
+
+        .half {
+            &__slide {
+                &--d-none {
+                    display: none;
+                }
+            }
+
+            &__container {
+                margin: 0 60px;
+            }
+
+            &__title {
+                padding: 20px 0;
+            }
+        }
+    }
+
+    &__order {
+        width: 65%;
+
+        .order {
+            &__current {
+                border-top: $border_thickness solid $black;
+                // background-color: $tertiary;
+
+                .current {
+                    &__option {
+                        padding: 15px 5px;
+                        width: 100%;
+
+                        .option {
+                            &__edit {
+                                cursor: pointer;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &__select {
+                border-top: $border_thickness solid $black;
+
+                .select {
+                    &__group {
+                        margin: 15px 0;
+                    }
+
+                    &__label {
+                        display: block;
+                        padding: 5px;
+                    }
+
+                    &__select {
+                        border: 2px solid #413E4B;
+                        background-color: white;
+                        padding: $padding_border_block;
+                        color: $black;
+                        width: 100%;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+
+
+            &__details {
+                .details {
+                    &__card {
+                        &--selected {
+                            border: $border_thickness solid $black;
+                        }
+
+                        &--selectable {
+                            cursor: pointer;
+                        }
+
+                        &--d-none {
+                            display: none;
+                        }
+
+                        background-color: $quatenary;
+                        color: $white;
+                        margin: 40px;
+                        padding: 20px;
+                        display: block;
+
+                        .card {          
+                            &__title {
+                                border-bottom: $border_thickness solid $white;
+                                padding: 5px;
+                                display: flex;
+                                align-items: center;
+                                
+                                img {
+                                    width: $icon_small_width;
+                                    padding-right: 10px;
+                                }
+                            }
+
+                            &__content {
+                                margin-top: 20px;
+
+                                .content {
+                                    &__content {
+                                        padding: 5px 0;
+                                        
+
+                                        .content {
+                                            &__type {
+                                                display: flex;
+                                                align-items: center;
+
+                                                img {
+                                                    width: $icon_small_width;
+                                                    padding-right: 10px;
+                                                }
+                                            }
+
+                                            &__price {
+                                                .price {
+                                                    &__last {
+                                                        padding-top: 10px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &__inline {
+                        text-align: right;
+
+                        .inline {
+                            &__button {
+                                &--d-none {
+                                    display: none;
+                                }
+
+                                border: $border_thickness solid $black;
+                                display: inline-block;
+                                padding: $padding_border_block;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__total {
+        width: 35%;
+        // background-color: $quatenary;
+        // color: $white;
+        background-color: $black;
+        color: $white;
+        height: 100%;
+        position: relative;
+        overflow-y: auto;
+
+        .total {
+            &__total {
+                &--d-none {
+                    display: none;
+                }
+
+                padding: 20px 0 40px 0;
+                font-size: $header_2;
+                border-bottom: $border_thickness solid $white;
+            }
+
+            &__content {
+                padding: 40px 0;
+                border-bottom: $border_thickness solid $white;
+
+                &--d-none {
+                    display: none;
+                }
+
+                .content {
+                    &__order {
+                        border-bottom: $border_thickness solid $white;
+                        padding: 10px 0;
+
+                        &:first-child {
+                            padding-top: 0;
+                        }
+
+                        &:last-child {
+                            border: none;
+                        }
+                    }
+                }
+            }
+
+            &__payment {
+                padding: 40px 0;
+
+                &--d-none {
+                    display: none;
+                }
+            }
+
+            &__pay {
+                text-align: right;
+
+                &--d-none {
+                    display: none;
+                }
+
+                .pay {
+                    &__submit {
+                        border: $border_thickness solid $white;
+                        display: inline-block;
+                        padding: $padding_border_block;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &__cancel {
+                margin-top: 10px;
+                text-align: right;
+
+                .cancel {
+                    &__submit {
+                        border: $border_thickness solid $white;
+                        display: inline-block;
+                        padding: $padding_border_block;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_primary) {
+    .payment {
+        
+
+        &__order {
+            width: 100%
+        }   
+
+        &__total {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_secondary) {
+    .payment {
+        &__half {
+            .half {
+                &__container {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_tertiary) {
+    .payment {
+        &__order {
+            .order {
+                &__details {
+                    .details {
+                        &__card {
+                            margin: 40px 0;
+                        }
+                    }
+                }
+            }           
+        }
+    }
+}

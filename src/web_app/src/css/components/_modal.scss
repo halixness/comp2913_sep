@@ -1,0 +1,248 @@
+// Modal style sheet
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: rgba(0, 0, 0, .6);
+    display: none;
+    color: $black;
+    overflow-y: auto;
+
+    &__error {
+        color: $red;
+        text-align: center;
+
+        &--d-none {
+            display: none;
+        }
+    }
+
+    &__container {
+        width: 50%;
+        min-width: 500px;
+        // min-height: 50%;
+        background-color: $white;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    &__header {
+        background-color: $tertiary;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &--danger {
+            background-color: lighten($red, 10%);
+            color: $white;
+        }
+        
+        .header {
+            &__close {
+                cursor: pointer;
+
+                img {
+                    width: $icon_small_width;
+                }
+            }
+        }
+    }
+
+    &__form {
+        .form {
+            &__group {
+                margin: 15px 20%;
+
+                &--col {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                &--row {
+                    &:first-child {
+                        padding-right: 5px;
+                    }
+
+                    &:last-child {
+                        padding-left: 5px;
+                    }
+                }
+            }
+
+            &__label {
+                display: block;
+                padding: 5px;
+            }
+
+            &__input {
+                border: $border_thickness solid $black;
+                padding: $padding_border_block;
+                width: 100%;
+            }
+
+            &__select {
+                border: $border_thickness solid $black;
+                background-color: $white;
+                padding: $padding_border_block;
+                color: $black;
+                width: 100%;
+                cursor: pointer;
+            }
+
+            &__error {
+                color: $red;
+
+                &--d-none {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &__content {
+        width: 100%;
+        padding: 20px;
+
+        &--split {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .content {    
+            &__half {
+                width: 50%;
+
+                &--form {
+                    width: 90%;
+                    text-align: center;
+                }
+
+                &--center {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .half {
+                    &__qr {
+                        width: 150px;
+                    }
+                }
+            }
+
+            &__field {
+                max-width: 300px;
+                width: 100%;
+                text-align: left;
+
+                .field {
+                    &__field {
+                        display: flex;
+                        align-items: center;
+                        padding: 5px 0;
+                    }
+                }
+
+                h3 {
+                    display: inline-block;
+                    padding-right: 10px;
+                }
+
+                img {
+                    width: $icon_small_width;
+                    display: inline-block;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+
+    &__close {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        // border-top: $border_thickness solid $black;
+
+        .close {
+            &__close {
+                cursor: pointer;
+                border: $border_thickness solid $black;
+                padding: $padding_border_block;
+                display: inline-block;
+                background-color: $white;
+                margin: 5px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_secondary) {
+    .modal {
+        &__container {
+            width: 80%;
+            min-width: 300px;
+        }
+
+        &__form {
+            .form {
+                &__group {
+                    margin: 15px 10%;
+                }
+            }
+        }
+
+        &__content {
+            .content {
+                &__half {
+                    width: 100%;
+
+                    &--form {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-height: $max_height_secondary) {
+    .modal {
+        &__content {
+            &--shrink {
+                padding: 5px 20px;
+            }
+
+            .content {
+                &__half {
+                    .half {
+                        &__qr {
+                            width: 100px;
+                        }
+
+                        &__act-img {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__close {
+            &--shrink {
+                padding: 5px 20px;
+            }
+        }
+    }
+
+    #price {
+        font-size: 14px;
+    }
+}

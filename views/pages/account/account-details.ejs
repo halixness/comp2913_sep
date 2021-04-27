@@ -1,0 +1,287 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+
+<div class="container">
+    <div class="account account--background">
+        <%- include('../../partials/account-side-bar') %>
+
+        <div class="account__section account__details">
+            <div class="section__title">
+                <h2>Your Details</h2>
+            </div>
+
+            <% if(locals.error){ %>
+                <% for (var i = 0; i < error.length;  i++ ) { %>
+                    <% if(error[i].path == 'success'){ %>                                    
+                        <div class="details__content details__content--success">
+                            <h2 class="content__success"><%- error[i].message %></h2>
+                        </div>
+                    <% } %>
+                <% } %>
+            <% }%>
+
+
+            <div class="details__content">
+                <div class="content__form-title content__form-title--top">
+                    <div class="form-title__title">
+                        <h2>Update Account Details</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Update details about yourself
+                    </div>
+                </div>
+
+                <form class="content__update-form" action="/user/account/update/details" method="POST" autocomplete="off">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                    <input type="hidden" name="id" value="<%- user.id %>" />
+
+                    <% if(locals.error){ %>
+                        <% for (var i = 0; i < error.length;  i++ ) { %>
+                            <% if(error[i].path == 'unsuccessful-details'){ %>                                    
+                                <p class="update-form__error"><%- error[i].message %></p>
+                            <% } %>
+                        <% } %>
+                    <% }%>
+
+                    <div class="update-form__group update-form__group--col">
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>Firstname</h3></label>
+                            <input id="name" class="update-form__input" type="text" name="name" placeholder="Name" value="<%- user.name %>" />
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'name'){ %>                                    
+                                        <p id="name-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% }%>
+                        </div>
+
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>Surname</h3></label>
+                            <input id="surname" class="update-form__input" type="text" name="surname" placeholder="Surname" value="<%- user.surname %>" />
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'surname'){ %>                                    
+                                        <p id="surname-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% }%>
+                        </div>                     
+                    </div>
+                    
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Email</h3></label>
+                        <input id="email" class="update-form__input" type="text" name="email" placeholder="E-mail" value="<%- user.email %>" />
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'email'){ %>                                    
+                                    <p id="email-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% }%>
+                    </div>
+    
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Phone Number</h3></label>
+                        <input id="phone" class="update-form__input" type="text" name="phone" placeholder="Phone" value="<%- user.phone %>" />
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'phone'){ %>                                    
+                                    <p id="phone-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% }%>
+                    </div>
+
+                    <div class="update-form__group">
+                        <button class="update-form__btn hvr-sweep-to-right" type="submit" ><h3>Update</h3></button>
+                    </div>
+                </form>
+
+                <div class="content__form-title content__form-title--side">
+                    <div class="form-title__title">
+                        <h2>Update Account Details</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Update details about yourself
+                    </div>
+                </div>
+            </div>
+
+            <div class="details__content">
+                <div class="content__form-title content__form-title--top">
+                    <div class="form-title__title">
+                        <h2>Update Account Address</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Update details about where you're from
+                    </div>
+                </div>
+
+                <form class="content__update-form" action="/user/account/update/address" method="POST" autocomplete="off">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                    <input type="hidden" name="id" value="<%- user.id %>" />
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Address Line 1</h3></label>
+                        <input id="address_1" class="update-form__input" type="text" name="address_1" placeholder="Address Line 1" value="<%- user.address_1 %>" />
+
+                        <% if(locals.error){ %>
+                            <% for (var i = 0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'unsuccessful-address'){ %>                                    
+                                    <p class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% }%>
+
+                    
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'address_1'){ %>                                    
+                                    <p id="address_1-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% }%>
+                    </div>
+    
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Address Line 2 <small>(optional)</small></h3></label>
+                        <input id="address_2" class="update-form__input" type="text" name="address_2" placeholder="Address Line 2" value="<%- user.address_2 %>" />
+
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'address_2'){ %>   
+                                    <p id="address_2-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>  
+    
+                    <div class="update-form__group update-form__group--col">
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>City</h3></label>
+                            <input id="city" class="update-form__input" type="text" name="city" placeholder="City" value="<%- user.city %>" />
+                            
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'city'){ %>
+                                        <p id="city-error" class="update-form__error"><%- error[i].message %></p>   
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>Postal / Zip Code</h3></label>
+                            <input id="zipcode" class="update-form__input" type="text" name="zipcode" placeholder="Zip Code" value="<%- user.zipcode %>" />
+
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'zipcode'){ %>
+                                        <p id="zipcode-error" class="update-form__error"><%- error[i].message %></p>   
+                                    <% } %>
+                                <% } %>
+                            <% } %>                  
+                        </div>
+                    </div>
+
+                    <div class="update-form__group">
+                        <button class="update-form__btn hvr-sweep-to-right" type="submit" ><h3>Update</h3></button>
+                    </div>
+                </form>
+
+                <div class="content__form-title content__form-title--side">
+                    <div class="form-title__title">
+                        <h2>Update Account Address</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Update details about where you're from
+                    </div>
+                </div>
+            </div>
+
+            <div class="details__content">
+                <div class="content__form-title content__form-title--top">
+                    <div class="form-title__title">
+                        <h2>Update Password</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Update your current password
+                    </div>
+                </div>
+
+                <form class="content__update-form" action="/user/account/update/password" method="POST" autocomplete="off">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                    <input type="hidden" name="id" value="<%- user.id %>" />
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Current Password</h3></label>
+                        <input id="current_password" class="update-form__input" name="current_password" type="password" placeholder="Current Password"/>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'current_password'){ %>
+                                    <p id="current_password-error" class="update-form__error"><%- error[i].message %></p>   
+                                <% } %>
+                            <% } %>
+                        <% } %>  
+                    </div>
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Password</h3></label>
+                        <input id="password" class="update-form__input" name="password" type="password" placeholder="Password"/>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'password'){ %>
+                                    <p id="password-error" class="update-form__error"><%- error[i].message %></p>   
+                                <% } %>
+                            <% } %>
+                        <% } %>  
+                    </div>
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Confirm Password</h3></label>
+                        <input id="confirm_password" class="update-form__input" name="confirm_password" type="password" placeholder="Confirm Password"/>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'confirm_password'){ %>
+                                    <p id="confirm_password-error" class="update-form__error"><%- error[i].message %></p>   
+                                <% } %>
+                            <% } %>
+                        <% } %>  
+                    </div>
+
+                    <div class="update-form__group">
+                        <button class="update-form__btn hvr-sweep-to-right" type="submit" ><h3>Update</h3></button>
+                    </div>
+                </form>
+
+                <div class="content__form-title content__form-title--side">
+                    <div class="form-title__title">
+                        <h2>Update Password</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Update your current password
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>

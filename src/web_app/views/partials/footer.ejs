@@ -1,0 +1,83 @@
+<footer class="footer">
+    <div class="footer__container">
+        <div class="footer__social">
+            <ul class="social__items">
+                <li class="social__item">
+                    <a class="social__link" href="###">
+                        <img src="/img/icons/facebook-white.png" />
+                    </a>
+                </li>
+
+                <li class="social__item">
+                    <a class="social__link" href="###">
+                        <img src="/img/icons/youtube-white.png" />
+                    </a>
+                </li>
+
+                <li class="social__item">
+                    <a class="social__link" href="###">
+                        <img src="/img/icons/instagram-white.png" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer__content">
+            <div class="content__links">
+                <h3 class="content__header">Memberships</h3>
+
+                <ul class="link__items">
+                    <li><a href="\memberships">Memberships</a></li>  
+                    <li><a href="\facilities">Facilities</a></li>  
+                    <li><a href="####">Book an Activity</a></li>  
+                </ul>
+            </div>
+
+            <div class="content__links">
+                <h3 class="content__header">Accounts</h3>
+
+                <ul class="link__items">
+                    <li><a href="/memberships">Join Now</a></li>  
+
+                    <% if(locals.session.userId) { %>
+                        <% if(locals.session.userType < 3) { %>
+                            <li><a href="/user/account">Account Overview</a></li>  
+                            <li><a href="/user/account/details">Account Details</a></li>  
+                            <li><a href="/user/account/memberships">Account Memberships</a></li>  
+                            <li><a href="/user/account/Bookings">Account Bookings</a></li>  
+                            <li><a href="/user/account/Payment">Account Payment Details</a></li>  
+
+                            <% if(locals.session.userType == 2) { %>
+                                <li><a href="/user/account/payment/cash">New Cash Payment</a></li>  
+                            <% } %>
+
+                            <li><a href="/user/logout">Logout</a></li>  
+                        <% } else { %>
+
+
+                            <li><a href="/manager/overview">Manager Account Overview</a></li>  
+                            <li><a href="/manager/statistics">View Usage Statistics</a></li>  
+                            <li><a href="/manager/register/employee">Add a new Employee</a></li>  
+                            <li><a href="/manager/activities/new">Configure Activities</a></li>  
+                            <li><a href="/manager/facilities/new">Configure Facilities</a></li>  
+                            <li><a href="/user/logout">Logout</a></li>  
+
+                        <% } %>
+                    <% }else{ %>    
+                        <li><a href="/user/login">Login</a></li>  
+                    <% } %>
+                </ul>
+            </div>
+
+            <div class="content__links">
+                <h3 class="content__header">Information</h3>
+                
+                <ul class="link__items">
+                    <li><a href="\home">Home</a></li>  
+                    <li><a href="\contact">Contact Us</a></li>  
+                    <li><a href="####">Terms</a></li>  
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

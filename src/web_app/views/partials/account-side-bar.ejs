@@ -1,0 +1,85 @@
+<div class="account__side-bar">
+    <div class="side-bar__profile-image">
+        <img src="/img/icons/user.png" /> <!-- ACCOUNT PROFILE PICTURE HERE (optional) -->
+    </div>
+
+    <div class="side-bar__header">
+        
+        <!-- Useful for ajax -->
+        <input id="ajax-user-id" type="hidden" value="<%- user.id %>"/></h2>
+        
+        <h2><%- user.name %> <%- user.surname%></h2>
+        <small class="header__email"><%- user.email %></small>
+
+        <% if(locals.session.userType == 2) { %>
+            <h2>Employee</h2>
+        <% } %>
+    </div>
+
+
+    <div class="side-bar__nav">
+        <ul class="nav__items">
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/user/account">
+                    <img src="/img/account/star.png" />
+                    <h3>Overview</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/user/account/details">
+                    <img src="/img/account/account.png" />
+                    <h3>My Details</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/user/account/memberships">
+                    <img src="/img/account/membership.png" />
+                    <h3>My Memberships</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/user/account/bookings">
+                    <img src="/img/account/calendar.png" />
+                    <h3>My Bookings</h3>
+                </a>
+            </li>
+
+            <li class="nav__item hvr-inset">
+                <a class="item__link" href="/user/account/payment">
+                    <img src="/img/account/discount.png" />
+                    <h3>My Payment Details</h3>
+                </a>
+            </li>
+
+            <% if(locals.session.userType == 2) { %>
+                <li class="nav__item hvr-inset">
+                    <a class="item__link" href="/user/account/payment/cash">
+                        <img src="/img/account/money.png" />
+                        <h3>New Cash Payment</h3>
+                    </a>
+                </li>
+            <% } %>
+
+            <li class="nav__item nav__item--last">
+                <div class="nav__item--logout hvr-sweep-to-right">
+                    <a href="/user/logout">
+                        <h3>Logout</h3>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="account__side-open">
+    <div class="side-open__bar"></div>
+
+    <div class="side-open__label">
+        <div class="label__expand">
+            Expand
+        </div>
+    </div>
+</div>

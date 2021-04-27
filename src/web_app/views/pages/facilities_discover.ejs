@@ -1,0 +1,247 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+
+<div class="modal modal--modal">
+    <div class="modal__container">
+        <div class="modal__header">
+            <h2>Book Activity</h2>
+            <div class="header__close modal--close">
+                <img src="/img/icons/close.png" />
+            </div>
+        </div>
+
+        <div class="modal__content modal__content--split modal__content--shrink">
+            <div class="content__half content__half--center">
+                <div class="content__field">
+                    <div class="field__field">
+                        <img src="/img/icons/clock.png" />
+                        <h3>Time:</h3>
+                        <span id="start_time">UNDEFINED</span>
+                    </div>
+                   
+                    <div class="field__field">
+                        <img src="/img/icons/timer.png" />
+                        <h3>Duration:</h3>
+                        <span id="duration">UNDEFINED</span>
+                    </div>
+
+                    <div class="field__field">
+                        <img src="/img/icons/gym.png" />
+                        <h3>Activity:</h3>
+                        <span id="activity">UNDEFINED</span>
+                    </div>
+
+                    <div class="field__field">
+                        <img src="/img/icons/team.png" />
+                        <h3>Capacity:</h3>
+                        <span id="capacity">UNDEFINED</span>
+                    </div>
+
+                    <div class="field__field">
+                        <img src="/img/account/location-black.png" />
+                        <h3>Location:</h3>
+                        <span id="location">UNDEFINED</span>
+                    </div>
+
+                    <div class="field__field">
+                        <img src="/img/icons/pay.png" />
+                        <h3>Price:</h3>
+                        <span id="price">UNDEFINED</span>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="content__half content__half--center">
+                <img class="half__qr half__act-img" src="/img/icons/trophy.png" />
+            </div>
+        </div>
+
+        <% if (locals.error.length > 0) { %>
+            <p id="full-error"  data_attr="<%- error[0].id %>" class="modal__error modal__error--d-none modal--open-auto"><%- error[0].message %></p>
+        <% } %>
+
+        <div class="modal__close modal__close--shrink">
+            <a href="###" id="book-activity" class="close__close hvr-sweep-to-right modal--close">
+                <h3>Proceeed to Payment</h3>
+            </a>
+            
+            <div class="close__close hvr-sweep-to-right modal--close">
+                <h3>Close</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <div class="page-title">
+        <div class="page-title__header">
+            <h2><%- facility[0].name %></h2>
+        </div>
+    </div>
+
+
+    <!-- <div class="facilities">
+
+        <%if (locals.facility && locals.images) {%>
+            <%if (facility.length > 0) { %>
+            
+            <div class="facilities__header">
+                <h2><%=facility[0].name%></h2>
+            </div>
+
+            <div class="facilities__container">
+
+                <div>
+                    <%for (var i = 0; i < images.length; ++i) {%>
+                    <img src="/uploads/<%=images[i].id%>.<%=images[i].ext%>"/>
+                    <% } %>
+
+                </div>
+                
+            </div>
+
+            <% } %>
+        <% } %>  
+    </div> -->
+
+
+
+    <div class="timetable">
+        <div class="timetable__container">
+            <div class="timetable__title">
+                <h2>Timetable</h2>
+            </div>
+
+            <div class="timetable__date-picker">
+                <h3>Show activities for the week of: </h3>
+                <span class="timetable__id" id="<%- facility[0].id %>"></span>
+
+                <input class=" date-picker__select timetable__facility--week" type="date">
+            </div>
+
+            <table class="timetable__table timetable__table--border timetable__facility">
+                <tr class="table__header">
+                    <% for(var i = 0; i < week.length; i++) { %>
+                        <% if(i == today) { %>
+                            <th class="timetable__facility--day header__item header__item--selected"><%- week[i] %></th>
+                        <% } else { %>
+                            <th class="timetable__facility--day header__item hvr-inset"><%- week[i] %></th>
+                        <% } %>
+                    <% } %>
+                </tr>
+            </table>
+
+            <table class="timetable__table timetable__facility--output">
+                <% if(timetable.length > 0) { %>
+
+                    <tr class="table__header">
+                        <th class="header__item header__item--time">Time</th>
+                        <th class="header__item header__item--activity">Activity</th>
+                        <th class="header__item header__item--duration">Duration</th>
+                        <th class="header__item header__item--location">Location</th>
+                        <th class="header__item header__item--book"></th>
+                    </tr>
+
+                    <% for(var i = 0; i < timetable.length; i++) { %>
+                        <tr class="table__row">
+                            <td class="row__item start_time-value" data_attr="<%- timetable[i].start_time %>""><%- timetable[i].start_time.substr(timetable[i].start_time.length - 8) %></td>
+                            <td class="row__item activity-value"><%- timetable[i].name_sport %></td>
+                            <td class="row__item duration-value"><%- timetable[i].duration %> Minutes</td>
+                            <input type="hidden" class="capacity-value" data_attr="<%- timetable[i].booked_capacity %> / <%- timetable[i].capacity %>" />
+                            <td class="row__item location-value"><%- timetable[i].facility_name %></td>
+
+                            <% if (timetable[i].discount == 0) { %>
+                                <% members = "Free" %>
+                            <% } else { %>
+                                <% members = "£" + (timetable[i].cost - timetable[i].discount) %>
+                            <% } %>
+                            <input type="hidden" class="price-value" value="<%- members %> for members,  £<%- timetable[i].cost %> for non-members" />
+
+
+                            <% if (timetable[i].booked_capacity >= timetable[i].capacity) { %>
+                                <td class="row__item">
+                                    <button type="button" disabled class="item__book">
+                                        <h3>Fully Booked</h3>
+                                    </button>
+                                </td>
+                            <% } else { %>
+                                <td class="row__item">
+                                    <div data_attr="<%- timetable[i].id %>" class="item__book item__book--book-modal hvr-sweep-to-right modal--open">
+                                        <h3>Book</h3>
+                                    </div>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr class="table__row">
+                        <td class="row__item row__item--none">No Activities Found on Selected Date</td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+
+    <div class="statistics">
+        <div class="statistics__container">
+            <div class="statistics__header">
+                <h2>What is on offer?</h2>
+            </div>
+
+            <div class="statistics__content">
+                <div class="content__statistic">
+                    <div class="statistic__image">
+                        <img src="/img/icons/pay-white.png" />
+                    </div>
+
+                    <div class="statistic__desc statistic__desc--center">
+                        You can rent out the <%- facility[0].name %> for private use at the rate of:  
+                        <h2>£<%- facility[0].price %> p/h</h2>
+                        Simply ask one of our employees at The Edgy for more information!
+                    </div>
+                </div>
+                
+                <div class="content__statistic">
+                    <div class="statistic__image">
+                        <img src="/img/facilities/<%- facility[0].icon %>.png">
+                    </div>
+
+                    <div class="statistic__desc statistic__desc--center">
+                        <%- facility[0].description %>
+                    </div>
+                </div>
+
+                <div class="content__statistic">
+                    <div class="statistic__image">
+                        <img src="/img/icons/cup-white.png">                    
+                    </div>
+
+                    <div class="statistic__desc statistic__desc--center">
+                        Today, you can choose from  
+                        <h2><%- timetable.length %></h2> 
+                        activities in the <%- facility[0].name %> to book, so get booking!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="gallery">
+        <div class="gallery__container">
+            <div class="gallery__content">
+                <%for (var i = 0; i < images.length; ++i) {%>
+                    <img class="content__image content__image--auto" src="/uploads/<%=images[i].id%>.<%=images[i].ext%>"/>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<%- include('../partials/footer') %>
+<%- include('../partials/foot') %>

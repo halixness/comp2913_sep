@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+        <% if(locals.title){ %>
+            <title><%- title %></title>
+        <% } else{ %>  
+            <title>UNKNOWN</title>
+        <% } %>
+
+        <link rel="stylesheet" href="/css/main.css?version=1">
+        <!-- <link rel="shortcut icon" href=""> -->
+        <link rel="icon" type="image/ico" href="/img/favicon/logo_99B_icon.ico">
+
+        <!-- for carousel -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+
+        <script src="//pixel-rc.convertize.io/6174.js" charset="UTF-8"></script>
+
+        <script>
+            window.nudgify = {data: {"cart":{"amount":"10.0","currency":"gbp"}}};
+            (function(w){
+                var k="nudgify",n=w[k]||(w[k]={});
+                n.uuid="c9cadf9b-6d08-4136-8f68-cf305521ad44";
+                var d=document,s=d.createElement("script");
+                s.src="https://pixel.nudgify.com/pixel.js";
+                s.async=1;
+                s.charset="utf-8";
+                d.getElementsByTagName("head")[0].appendChild(s)
+            })(window)
+        </script>
+    </head>
+    <body>

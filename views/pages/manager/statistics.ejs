@@ -1,0 +1,268 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+<link rel = "stylesheet" type = "text/css" href = "/css/Chart.min.css" />
+
+<div class="container">
+    <div class="account account--background">
+        <%- include('../../partials/manager-side-bar') %>
+
+        <div class="account__section-container">
+            <div class="breadcrumbs">
+                <div class="breadcrumbs__selector">
+                    <div class="selector__item selector__item--selected" target="general-usage">
+                        <h3>General Usage</h3>
+                    </div>
+
+                    <div class="selector__item selector__item sport-result" target="activity-usage">
+                        <h3>Activity Usage</h3>
+                    </div>
+
+                    <div class="selector__item selector__item activity-result" target="session-usage">
+                        <h3>Session Usage</h3>
+                    </div>
+
+                    <div class="selector__item selector__item facility-result" target="facility-usage">
+                        <h3>Facility Usage</h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="account__section account__section--full-width account__details" id="general-usage">
+                <!-- Activity Weekly Overall -->
+                <div class="section__title">
+                    <h2>General Usage</h2>
+                </div>
+
+                <div class="details__content details__content--wrap">
+
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>General Weekly Usage</h2>
+                        </div>
+
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Start Date</h3></label>
+                                <input class="form-title__input" id="login-week-start" value="2020-01-01" type="date"></input>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>End Date</h3></label>
+                                <input class="form-title__input" id="login-week-end" value="2020-04-01" type="date"></input>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="content__list content__list--full-width">
+                        <img id="loader-7" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+
+                        <canvas class="list__graph" id="weekly-login-usage" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="account__section account__section--d-none account__section--full-width account__details" id="activity-usage">
+
+
+                <div class="section__title">
+                    <h2>Activity Usage</h2>
+                </div>
+
+                <!-- Activity Usage Overall -->
+                <div class="details__content details__content--wrap">
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>Overall Activity Usage</h2>
+                        </div>                       
+                        
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Activity</h3></label>
+                                <select id="sport-select-1" class="form-title__select a-select-3" disabled></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content__list content__list--full-width">
+                        <img id="loader-5" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+    
+                        <canvas class="list__graph" id="single-sport-usage" width="400" height="200"></canvas>
+                    </div>
+                </div>            
+                
+                <!-- Activity Weekly Overall -->                
+                <div class="details__content details__content--wrap">
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>Weekly Activity Usage</h2>
+                        </div>
+
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Activity</h3></label>
+                                <select id="sport-select-2" class="form-title__select a-select-3" disabled></select>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Start Date</h3></label>
+                                <input class="form-title__input" id="sport-week-start" value="2020-01-01" type="date"></input>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>End Date</h3></label>
+                                <input class="form-title__input" id="sport-week-end" value="2020-04-20" type="date"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content__list content__list--full-width">
+                        <img id="loader-6" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+
+                        <canvas class="list__graph" id="weekly-sport-usage" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="account__section account__section--d-none account__section--full-width account__details" id="session-usage">
+
+                <div class="section__title">
+                    <h2>Session Usage</h2>
+                </div>
+
+
+                <!-- Session Usage Overall -->
+                <div class="details__content details__content--wrap">
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>Overall Session Usage</h2>
+                        </div>                  
+
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Session</h3></label>
+                                <select id="activity-select-1" class="form-title__select a-select" disabled></select>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content__list content__list--full-width">
+                        <img id="loader-1" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+
+                        <canvas class="list__graph" id="single-activity-usage" width="400" height="200"></canvas>
+                    </div>    
+                </div>
+
+
+                <!-- Session Weekly Overall -->
+                <div class="details__content details__content--wrap">
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>Weekly Session Usage</h2>
+                        </div>   
+
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Session</h3></label>
+                                <select id="activity-select-2" class="form-title__select a-select" disabled></select>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Start Date</h3></label>
+                                <input class="form-title__input" id="activity-week-start" value="2020-01-01" type="date"></input>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>End Date</h3></label>
+                                <input class="form-title__input" id="activity-week-end" value="2020-04-20" type="date"></input>
+                            </div>
+                        </div>
+
+                        <div class="content__list content__list--full-width">
+                            <img id="loader-2" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+
+                            <canvas class="list__graph" id="weekly-activity-usage" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="account__section account__section--d-none account__section--full-width account__details" id="facility-usage">
+
+                <div class="section__title">
+                    <h2>Facility Usage</h2>
+                </div>
+
+
+                <!-- Facility Usage Overall -->
+                <div class="details__content details__content--wrap">
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>Overall Facility Usage</h2>
+                        </div>
+
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Facility</h3></label>
+                                <select id="facility-select-1" class="form-title__select a-select-2" disabled></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content__list content__list--full-width">
+                        <img id="loader-3" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+
+                        <canvas class="list__graph" id="single-facility-usage" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+
+                <!-- Facility Weekly Overall -->
+                <div class="details__content details__content--wrap">
+                    <div class="content__form-title content__form-title--top-open">
+                        <div class="form-title__title">
+                            <h2>Weekly Facility Usage</h2>
+                        </div>
+
+                        <div class="form-title__form">
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Facility</h3></label>
+                                <select id="facility-select-2" class="form-title__select a-select-2" disabled></select>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>Start Date</h3></label>
+                                <input class="form-title__input" id="facility-week-start" value="2020-01-01" type="date"></input>
+                            </div>
+
+                            <div class="form-title__group">
+                                <label class="form-title__label"><h3>End Date</h3></label>
+                                <input class="form-title__input" id="facility-week-end" value="2020-04-20" type="date"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content__list content__list--full-width">
+                        <img id="loader-4" src="/img/elements/loader.gif" style="margin:auto" width="200px"/>
+
+                        <canvas class="list__graph" id="weekly-facility-usage" width="400" height="200"></canvas>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>
+
+<script src="/js/statistics/Chart.min.js"></script>
+<script src="/js/statistics/ChartFunctions.js"></script>
+<script src="/js/statistics/main.js"></script>

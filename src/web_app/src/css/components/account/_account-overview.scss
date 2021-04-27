@@ -1,0 +1,138 @@
+.account {
+    &__overview {    
+        .overview {
+            &__option {
+                width: 45%;
+                min-width: 350px;
+                max-width: 450px; 
+                display: flex;
+
+                &--full-width {
+                    width: 100%;
+                    max-width: none;
+                }
+
+                .option {
+                    &__content {
+                        width: 100%;
+                        background-color: $primary;
+                        position: relative;
+                        margin: 20px;
+                        padding: 20px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+
+                        &--center {
+                            text-align: center;
+                            background-color: $primary;
+                        }
+
+                        &--yellow {
+                            background-color: $tertiary;
+                            color: $black !important;
+                        }
+
+                        &--danger {
+                            background-color: lighten($red, 10%);
+                        }
+
+                        .content {
+                            &__image {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 10px;
+
+                                img {
+                                    width: $icon_default_width;
+                                }
+                            }
+
+                            &__title {
+                                font-weight: bold;
+                                text-transform: uppercase;
+                                display: inline-block;
+
+                                &--margin {
+                                    margin-right: 20px;
+                                }
+
+                                &--margin-bottom {
+                                    margin-bottom: 20px;
+                                }
+                            }
+
+                            &__inline {
+                                display: inline-flex;
+                                justify-content: center;
+
+                                &--right {
+                                    margin-left: auto;
+                                }
+                            }
+
+                            &__explore {
+                                border: $border_thickness solid $white;
+                                padding: $padding_border_block;
+                                margin-top: 20px;
+
+                                &--black {
+                                    border-color: $black;
+                                }
+                            }
+
+                            &__dsc {
+                                &--flex {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+
+                                &--margin-bottom {
+                                    margin-bottom: 20px;
+                                }
+                            }
+
+                            &__field {
+                                max-width: 300px;
+                                width: 100%;
+                                text-align: left;
+
+                                .field {
+                                    &__field {
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 5px 0;
+                                    }
+                                }
+
+                                h3 {
+                                    display: inline-block;
+                                    padding-right: 10px;
+                                }
+
+                                img {
+                                    width: $icon_small_width;
+                                    display: inline-block;
+                                    padding-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $max_width_tertiary) {
+    .account {
+        &__overview {
+            .overview {
+                &__option {
+                    min-width: 300px;
+                }
+            }
+        }
+    }
+}

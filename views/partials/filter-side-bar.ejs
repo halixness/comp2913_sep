@@ -1,0 +1,98 @@
+<div class="account__side-bar account__side-bar--filter">
+    <!-- <div class="side-bar__profile-image">
+        <img src="/img/icons/selective.png" />
+    </div> -->
+
+    <div class="side-bar__header">
+        <h2>Filter By</h2>
+    </div>
+
+
+    <div class="side-bar__nav">
+        <ul class="nav__items">
+            <form method="GET" action="/activities">
+                <input type="hidden" name="page_no" value="1">
+
+                <li class="nav__item">
+                    <div class="item__filter">
+                        <label class="filter__label"><h3>Sport</h3></label>
+                        <input class="filter__input" id="sport" type="text" list="sports" name="sport" value="<%=filters.sport%>">
+                        <datalist id="sports">
+                            <% for(var i = 0; i < sports.length; i++) { %>
+                                <option><%- sports[i].name %></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+                </li>
+
+                <li class="nav__item">
+                    <div class="item__filter">
+                        <label class="filter__label"><h3>Facility</h3></label>
+                        <input class="filter__input" id="facility" type="text" list="facilities" name="facility" value="<%=filters.facility%>">
+                        <datalist id="facilities">
+                            <% for(var i = 0; i < facilities.length; i++) { %>
+                                <option><%- facilities[i].name %></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+                </li>
+
+                <li class="nav__item">
+                    <div class="item__filter">
+                        <label class="filter__label"><h3>Start Date</h3></label>
+                        <input class="filter__input" type="date" name="start_date" value="<%=filters.start_date%>">
+                    </div>
+                </li>
+
+                <li class="nav__item">
+                    <div class="item__filter">
+                        <label class="filter__label"><h3>End Date</h3></label>
+                        <input class="filter__input" type="date" name="end_date" value="<%=filters.end_date%>">
+                    </div>
+                </li>
+
+                <li class="nav__item">
+                    <div class="item__filter">
+                        <label class="filter__label"><h3>Items per page</h3></label>
+                        <select class="filter__select" name="no_items">
+                            <option value="5" <%if (no_items ==  5){%> selected <%}%> >  5</option>
+                            <option value="7" <%if (no_items ==  7){%> selected <%}%> >  7</option>
+                            <option value="10" <%if (no_items == 10){%> selected <%}%> > 10</option>
+                            <option value="20" <%if (no_items == 20){%> selected <%}%> > 20</option>
+                            <option value="50" <%if (no_items == 50){%> selected <%}%> > 50</option>
+                        </select>
+                    </div>
+                </li>
+
+                <li class="nav__item nav__item--last">
+                    <button type="submit" class="nav__item--logout nav__item--submit hvr-sweep-to-right">
+                        <h3>Submit<h3>
+                    </button>
+
+                    <div class="nav__item--logout nav__item--submit hvr-sweep-to-right">
+                        <a href="/activities">
+                            <h3>clear<h3>
+                        </a>
+                    </div>  
+
+                </li>
+                
+
+
+            </form>
+
+
+        </ul>
+    </div>
+</div>
+
+
+<div class="account__side-open">
+    <div class="side-open__bar"></div>
+
+    <div class="side-open__label">
+        <div class="label__expand">
+            Expand
+        </div>
+    </div>
+</div>

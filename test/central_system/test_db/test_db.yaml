@@ -1,0 +1,93 @@
+test_0:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO Sport(name, description) VALUES("walking", "go for a walk")'
+  - result: True
+    command: 'INSERT INTO Sport(name, description) VALUES("sit down", "go for a nice sit down")'
+  # Extreme data
+  - result: True
+    command: 'INSERT INTO Sport(name, description) VALUES("", "")'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO Sport(id, name) VALUES(1, "generic sport")'
+
+test_1:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", 0, 100.0, "2020-01-01 10:00:00", 2, 1, 1)'
+  - result: True
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", 100, 100.0, "2020-01-01 10:00:00", 2, 1, 1)'
+  - result: True
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", 0, -100.0, "2020-01-01 10:00:00", 2, 1, 1)'
+  - result: True
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", -100, 100.0, "2020-01-01 10:00:00", 0, 1, 1)'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", 0, 0, "2020-01-01 24:01:00", 2, 1, 1)'
+  - result: False
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", 0, 0, "2020-01-01 10:00:00", 2, 99, 1)'
+  - result: False
+    command: 'INSERT INTO Activity(name, description, discount, cost, start_time, duration, id_sport, id_facility) VALUES("name", "description", 0, 0, "2020-01-01 10:00:00", 2, 1, 99)'
+
+  
+test_2:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO User(name, surname, email, password, phone, address_1, zipcode, city, birth) VALUES("person", "0", "person0@leeds.ac.uk", "password", "07777777777", "university", "LS2 9JT", "Leeds", "1990-01-01")'
+  # Extreme data
+  - result: True
+    command: 'INSERT INTO User(name, surname, email, password, phone, address_1, zipcode, city, birth) VALUES("grandpa", "grandpa", "person1_with_an_excessively_lengthy_but_valid_emial_address@leeds.ac.uk", "password", "07777777777", "university", "LS2 9JT", "Leeds", "1970-01-01")'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO User(name, surname, email, password, phone, address_1, zipcode, city, birth) VALUES("person", "2", "password", "07777777777", "university", "LS2 9JT", "Leeds", "1990-01-01")'
+  - result: False
+    command: 'INSERT INTO User(name, surname, email, password, phone, address_1, zipcode, city, birth) VALUES("person", "3", "person0@leeds.ac.uk", "password", "07777777777", "university", "LS2 9JT", "Leeds", "1990-01-01")'
+  
+test_3:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO Card(stripe_token, number, cvv, expire_date, type) VALUES("test", "1234 1234 1234 1234", 000, "01/20", "visa")'
+  # Extreme data
+  - result: True
+    command: 'INSERT INTO Card(stripe_token, number, cvv, expire_date, type) VALUES("test", "1234 1234 1234 1234 1", 999999999, "012020", "vvvvvvvvvvvvvvvvvisa")'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO Card(stripe_token, number, cvv, expire_date, type) VALUES("test", "1234 1234 1234 1234", 000, , "visa")'
+  - result: False
+    command: 'INSERT INTO Card(stripe_token, number, cvv, expire_date, type) VALUES("test", "1234 1234 1234 1234", "abc", "01/20", "")'
+
+test_4:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO Card_User VALUES(1,1)'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO Card_User VALUES(-1,-1)'
+  - result: False
+    command: 'INSERT INTO Card_User VALUES(1,99)'
+
+test_5:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO BookedActivity(id_activity, purchase_date) VALUES(1,"2020-01-01 19:00:00")'
+  # Extreme data
+  - result: True
+    command: 'INSERT INTO BookedActivity(id_activity, purchase_date) VALUES(1,"2020-02-29 23:59:59")'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO BookedActivity(id_activity, purchase_date) VALUES(99,"2020-01-01 19:00:00")'
+  - result: False
+    command: 'INSERT INTO BookedActivity(id_activity, purchase_date) VALUES(1,"2020-01-01 24:01:00")'
+  
+test_6:
+  # Normal data
+  - result: True
+    command: 'INSERT INTO Payment(purchase_date, status, amount, id_card, id_booked_activity, id_user) VALUES("2020-01-01 19:00:00",1,100,1,1,1)'
+  # Extreme data
+  - result: True
+    command: 'INSERT INTO Payment(purchase_date, status, amount, id_card, id_booked_activity, id_user) VALUES("2020-02-29 23:59:59",1,-100,1,1,1)'
+  # Abnormal data
+  - result: False
+    command: 'INSERT INTO Payment(purchase_date, status, amount, id_card, id_booked_activity, id_user) VALUES("2020-01-01 19:00:00",1,100,99,99,99)'
+  - result: False
+    command: 'INSERT INTO Payment(purchase_date, status, amount, id_card, id_booked_activity, id_user) VALUES("2020-01-01 24:01:00",1,100,1,1,1)'

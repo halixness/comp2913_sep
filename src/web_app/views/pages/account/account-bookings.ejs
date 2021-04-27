@@ -1,0 +1,142 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+
+<div class="modal modal--modal">
+    <div class="modal__container">
+        <div class="modal__header">
+            <h2 id="sportName"></h2>
+            <div class="header__close modal--close">
+                <img src="/img/icons/close.png" />
+            </div>
+        </div>
+
+        <div class="modal__content modal__content--split">
+            <div class="content__half content__half--center">
+                <div class="content__field">
+                    <div class="field__field">
+                        <img src="/img/icons/clock.png" />
+                        <h3>Time:</h3>
+                        <span id="start_time"></span>
+                    </div>
+                   
+                    <div class="field__field">
+                        <img src="/img/icons/timer.png" />
+                        <h3>Duration:</h3>
+                        <span id="duration"></span>
+                    </div>
+
+                    <div class="field__field">
+                        <img src="/img/icons/confirm.png" />
+                        <h3>Status:</h3>
+                        <span id="status"></span>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="content__half content__half--center">
+                <img id="qr" class="half__qr" />
+            </div>
+        </div>
+
+        <div class="modal__close">
+            <div class="close__close hvr-sweep-to-right modal--close">
+                <a id="delete-booking" href="#">
+                    <h3>Cancel Booking</h3>
+                </a>
+            </div>
+
+            <div class="close__close hvr-sweep-to-right modal--close">
+                <h3>Close</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="account account--background">
+        <%- include('../../partials/account-side-bar') %>
+
+        <div class="account__section account__overview">
+
+            <div class="section__title">
+                <h2>Your Bookings</h2>
+            </div>
+
+
+            <% if(locals.bookings && locals.bookings.length > 0){ %>
+                <% for (var i = 0; i < bookings.length;  i++ ) { %>
+                    <a href="##" class="overview__option overview__option--qr-modal hvr-float modal--open" attr_qr="<%- bookings[i].qr %>" attr_id="<%- bookings[i].id %>">
+                        <div class="option__content option__content--center option__content--yellow">
+                            <div class="content__title content__title--margin-bottom">
+                                <h2 class="sportName-value"><%- bookings[i].sportName %></h2>
+                            </div>
+
+                            <div class="content__dsc content__dsc--flex">
+                                <div class="content__field">
+                                    <div class="field__field">
+                                        <img src="/img/icons/clock.png" />
+                                        <h3>Time:</h3>
+                                        <span class="start_time-value"><%- bookings[i].start_time %></span>
+                                    </div>
+                                   
+                                    <div class="field__field">
+                                        <img src="/img/icons/timer.png" />
+                                        <h3>Duration:</h3>
+                                        <span class="duration-value"><%- bookings[i].duration %> Minutes</span>
+                                    </div>
+          
+                                    <div class="field__field">
+                                        <% if(bookings[i].bookingStatus){ %> 
+                                            <img src="/img/icons/confirm.png" />
+                                            <h3>Status:</h3>
+                                            <span class="field__success status-value">confirmed</span>
+                                        <% } else { %> 
+                                            <img src="/img/icons/close.png" />
+                                            <h3>Status:</h3>
+                                            <span class="field__danger status-value">pending</span>
+                                        <% } %>
+                                    </div>  
+
+                                    <div class="field__field">
+                                        <img src="/img/account/discount-black.png" />
+                                        <h3>Amount Paid:</h3>
+                                        £<%- bookings[i].amount %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content__inline">
+                                <div class="content__explore content__explore--black hvr-sweep-to-right hvr-sweep-to-right--white">
+                                    <h3>Details</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+     
+            <% } else { %>
+                <div class="section__not-found">
+                    <div class="not-found__image">
+                        <img src="/img/icons/sadface.jpg" />
+                    </div>
+
+                    <h2>No Bookings Found</h2>
+
+                    <div class="not-found__link hvr-sweep-to-right">
+                        <a href="/activities">
+                            <h3>Make Bookings</h3>
+                        </a>
+                    </div>
+
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>

@@ -1,0 +1,218 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+
+<!-- TODO: add shake animation on incorrect input -->
+
+<div class="container">
+    <div class="account account--background">
+        <%- include('../../partials/manager-side-bar') %>
+
+        <div class="account__section account__details">
+
+            <div class="section__title">
+                <h2>Add a new Employee</h2>
+            </div>
+
+            <% if(locals.error){ %>
+                <% for (var i = 0; i < error.length;  i++ ) { %>
+                    <% if(error[i].path == 'success'){ %>                                    
+                        <div class="details__content details__content--success">
+                            <h2 class="content__success"><%- error[i].message %></h2>
+                        </div>
+                    <% } %>
+                <% } %>
+            <% }%>
+
+            <% if(locals.error){ %>
+                <% for (var i = 0; i < error.length;  i++ ) { %>
+                    <% if(error[i].path == 'unsuccessful'){ %>                                    
+                        <div class="details__content details__content--danger">
+                            <h2 class="content__danger"><%- error[i].message %></h2>
+                        </div>
+                    <% } %>
+                <% } %>
+            <% }%>
+
+
+            <div class="details__content">
+                <div class="content__form-title content__form-title--top">
+                    <div class="form-title__title">
+                        <h2>New Employee</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Ensure their details are correct as these will be used for them to log in
+                    </div>
+                </div>
+
+
+                <form class="content__update-form" action="" method="POST" autocomplete="off">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                    <input type="hidden" name="type" value="2" />
+
+                    <div class="update-form__group update-form__group--col">
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>Firstname</h3></label>
+                            <input id="name" class="update-form__input" name="name" type="text" placeholder="Name" value="<%- form.name %>" />
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'name'){ %>
+                                        <p id="name-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>Surname</h3></label>
+                            <input id="surname" class="update-form__input" name="surname" type="text" placeholder="Surname" value="<%- form.surname %>"/>
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'surname'){ %>
+                                        <p id="surname-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Email</h3></label>
+                        <input id="email" class="update-form__input" name="email" type="text" placeholder="E-mail" value="<%- form.email %>"/>
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'email'){ %>
+                                    <p id="email-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Password</h3></label>
+                        <input id="password" class="update-form__input" name="password" type="password" placeholder="Password"/>
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'password'){ %>
+                                    <p id="password-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Confirm Password</h3></label>
+                        <input id="confirm_password" class="update-form__input" name="confirm_password" type="password" placeholder="Confirm Password"/>
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'confirm_password'){ %>
+                                    <p id="confirm_password-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Date of Birth</h3></label>
+                        <input id="birth" class="update-form__input" name="birth" type="date" placeholder="Date of Birth" value="<%- form.birth %>"/>
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'birth'){ %>
+                                    <p id="birth-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Phone Number</h3></label>
+                        <input id="phone" class="update-form__input" name="phone" type="text" placeholder="Phone" value="<%- form.phone %>" />
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'phone'){ %>
+                                    <p id="phone-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                    
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Address Line 1</h3></label>
+                        <input id="address_1" class="update-form__input" name="address_1" type="text" placeholder="Address Line 1" value="<%- form.address_1 %>" />
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'address_1'){ %>
+                                    <p id="address_1-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Address Line 2 <small>(optional)</small></h3></label>
+                        <input id="address_2" class="update-form__input" name="address_2" type="text" placeholder="Address Line 2" value="<%- form.address_2 %>" />
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'address_2'){ %>
+                                    <p id="address_2-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                
+                    <div class="update-form__group update-form__group--col">
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>City</h3></label>
+                            <input id="city" class="update-form__input" name="city" type="text" placeholder="City" value="<%- form.city %>" />
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'city'){ %>
+                                        <p id="city-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+
+                        <div class="update-form__group--row">
+                            <label class="update-form__label"><h3>Postal / Zip Code</h3></label>
+                            <input id="zipcode" class="update-form__input" name="zipcode" type="text" placeholder="Zip Code" value="<%- form.zipcode %>" />
+                            <% if(locals.error){ %>
+                                <% for (var i =0; i < error.length;  i++ ) { %>
+                                    <% if(error[i].path == 'zipcode'){ %>
+                                        <p id="zipcode-error" class="update-form__error"><%- error[i].message %></p>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                
+                    <div class="update-form__group">
+                        <button class="update-form__btn hvr-sweep-to-right" type="submit"><h3>Register</h3></button>
+                    </div>
+                </form>      
+            
+                <div class="content__form-title content__form-title--side">
+                    <div class="form-title__title">
+                        <h2>New Employee</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Ensure their details are correct as these will be used for them to log in
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>

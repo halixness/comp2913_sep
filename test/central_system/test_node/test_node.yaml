@@ -1,0 +1,136 @@
+test_0_0:
+  # Normal data
+  - result: True
+    payload:
+      name: not
+      surname: real
+      email: test@leeds.ac.uk
+      password: password
+      confirm_password: password
+      phone: "07777777777"
+      address_1: Leeds Uni
+      address_2: EC Stoner
+      zipcode: LS2 9JT
+      city: Leeds
+      type: 1
+      birth: '2020-01-01'
+  # Extreme data
+  - result: True
+    payload:
+      name: not
+      email: another_test@leeds.ac.uk
+      password: password
+      confirm_password: password
+      phone: "999"
+      address_1: Leeds Uni
+      zipcode: LS2 9JT
+      city: Leeds
+      type: 1
+      birth: '1970-01-01'
+  # Abnormal data
+  - result: False
+    payload:
+      name: not
+      surname: real
+      email: test@leeds.ac.uk
+      password: password
+      confirm_password: password
+      phone: "07777777777"
+      address_1: Leeds Uni
+      zipcode: LS2 9JT
+      city: Leeds
+      type: 1
+      birth: '2020-01-01'
+  - result: False
+    payload:
+      name: not
+      surname: real
+      password: password
+      confirm_password: password
+      phone: "07777777777"
+      address_1: Leeds Uni
+      zipcode: LS2 9JT
+      city: Leeds
+      type: 1
+      birth: '2020-01-01'
+
+test_0_1:
+  # Normal data
+  - result: True
+    payload:
+      email: test@leeds.ac.uk
+      password: password
+  # Abnormal data
+  - result: False
+    payload:
+      email: test@leeds.ac.uk
+      password: wrongpassword
+  - result: False
+    payload:
+      email: BOIII
+      password: password
+  - result: False
+    payload:
+      email: BOIII@test.com
+      password: password
+
+test_1_0:
+  # Normal data
+  - result: True
+    payload:
+      name: Big Swim
+      description: A big swim in a 100cm X 100cm pool. Antibac water included.
+      cost: '14.99'
+      date: '2020-5-10'
+      time: '14:00:00'
+      duration: '1'
+      id_sport: '1'
+      id_facility: '1'
+  # Extreme data
+  - result: True
+    payload:
+      name: ()*&^%$#@![]/\~`'"-=+-1234567890Bigbig Swim
+      description: ()*&^%$#@![]/\~`'"-=+-1234567890 big swim in a 100cm X 100cm pool. Antibac water included. A big swim in a 100cm X 100cm pool. Antibac water included.A big swim in a 100cm X 100cm pool. Antibac water included. A big swim in a 100cm X 100cm pool. Antibac water included.
+      cost: '0'
+      date: '1970-5-10'
+      time: '00:00:00'
+      duration: '0'
+      id_sport: '1'
+      id_facility: '1'
+  - result: True
+    payload:
+      name: ()*&^%$#@![]/\~`'"-=+-1234567890Bigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbig Swim
+      description: ()*&^%$#@![]/\~`'"-=+-1234567890 big swim in a 100cm X 100cm pool. Antibac water included. A big swim in a 100cm X 100cm pool. Antibac water included.A big swim in a 100cm X 100cm pool. Antibac water included. A big swim in a 100cm X 100cm pool. Antibac water included.
+      cost: '999999999'
+      date: '1970-5-10'
+      time: '14:00:00'
+      duration: '999999999'
+      id_sport: '1'
+      id_facility: '1'
+  # Abnormal data
+  - result: False
+    payload:
+      description: __False Swim__
+      cost: '14.99'
+      date: '2020-5-10'
+      time: '14:00:00'
+      duration: '1'
+      id_sport: '1'
+      id_facility: '1'
+  - result: False
+    payload:
+      description: __False Swim__
+      cost: '14.99'
+      date: '2020-5-10 14:00:00'
+      duration: '1'
+      id_sport: '1'
+      id_facility: '1'
+
+test_1_1:
+  - result:
+      contains:
+        - Big Swim
+        - ()*&^%$#@![]/\~`'"-=+-1234567890Bigbig Swim
+        - ()*&^%$#@![]/\~`'"-=+-1234567890Bigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbigbig Swim
+      not_contains:
+        - __False Swim__

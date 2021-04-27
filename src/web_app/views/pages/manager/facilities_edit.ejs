@@ -1,0 +1,171 @@
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+
+<div class="container">
+    <div class="account account--background">
+        <%- include('../../partials/manager-side-bar') %>
+
+        <div class="account__section account__details">
+            <div class="section__title">
+                <h2>Edit Facility</h2>
+            </div>
+
+            <% if(locals.error){ %>
+                <% for (var i = 0; i < error.length;  i++ ) { %>
+                    <% if(error[i].path == 'success'){ %>                                    
+                        <div class="details__content details__content--success">
+                            <h2  class="content__success"><%- error[i].message %></h2>
+                        </div>
+                    <% } %>
+                <% } %>
+            <% }%>
+
+
+            <% if(locals.error){ %>
+                <% for (var i = 0; i < error.length;  i++ ) { %>
+                    <% if(error[i].path == 'unsuccessful'){ %>                                    
+                        <div class="details__content details__content--danger">
+                            <h2 class="content__danger"><%- error[i].message %></h2>
+                        </div>
+                    <% } %>
+                <% } %>
+            <% }%>
+
+
+            <div class="details__content">
+                <div class="content__form-title content__form-title--top">
+                    <div class="form-title__title">
+                        <h2>Edit Facility</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Ensure their details are correct as these will be used for them to log in
+                    </div>
+                </div>
+
+
+
+                <form class="content__update-form" action="?_csrf=<%- csrfToken %>" method="POST" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Name</h3></label>
+                        <input id="name" class="update-form__input" type="text" name="name" placeholder="Name" value="<%- facility[0].name %>" />
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'name'){ %>
+                                    <p id="name-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Description</h3></label>
+                        <textarea id="description" class="update-form__input" name="description" placeholder="Description"><%- facility[0].description %></textarea>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'description'){ %>
+                                    <p id="description-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    
+                    
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Price</h3></label>
+                        <input id="price" class="update-form__input" type="text" name="price" placeholder="Price" value="<%- facility[0].price %>" />
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'price'){ %>
+                                    <p id="price-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Capacity</h3></label>
+                        <input id="capacity" class="update-form__input" type="text" name="capacity" placeholder="Capacity" value="<%- facility[0].capacity %>" />
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'capacity'){ %>
+                                    <p id="capacity-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                
+                
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>icon</h3></label>
+                        <!-- <input class="update-form__input" type="text" name="icon" /> -->
+                        <input id="icon" type="hidden" name="icon" value="<%- facility[0].icon %>" />
+
+                        <% for(var i = 0; i < icons.length; i++) { %>
+                            <img class="update-form__icon update-form__icon--<%- icons[i] %>" src="/img/facilities/<%- icons[i] %>.png" data_attr="<%- icons[i] %>" />
+                        <% } %>
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'icon'){ %>
+                                    <p id="icon-error" class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>Current Image(s)</h3></label>
+                        
+                        <div id="image-container">
+                            <% for(var i = 0; i < images.length; ++i) { %>
+                                <div class="update-form__image">
+                                    <span class="image__delete image__delete--facility" image_attr="<%- images[i].id %>" facility_attr="<%- facility[0].id %>" ><h2>×</h2></span>
+                                    <img src="/uploads/<%=images[i].id%>.<%=images[i].ext%>"/>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="update-form__group">
+                        <label class="update-form__label"><h3>New Image(s) <small>(optional)</small></h3></label>
+                        <input id="image" type="file" name="image" multiple />
+
+                        <% if(locals.error){ %>
+                            <% for (var i =0; i < error.length;  i++ ) { %>
+                                <% if(error[i].path == 'image'){ %>
+                                    <p id="image-error"class="update-form__error"><%- error[i].message %></p>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+
+                    <div class="update-form__group">
+                        <button class="update-form__btn hvr-sweep-to-right" type="submit"><h3>Update</h3></button>
+                    </div>
+                </form>
+
+                <div class="content__form-title content__form-title--side">
+                    <div class="form-title__title">
+                        <h2>Edit Facility</h2>
+                    </div>
+
+                    <div class="form-title__desc">
+                        Ensure their details are correct as these will be used for them to log in
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>
+<%- include('../../partials/foot') %>

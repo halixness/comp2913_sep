@@ -1,0 +1,102 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+
+<div class="container">
+    <div class="page-title">
+        <div class="page-title__header">
+            <h2>Our Facilities</h2>
+        </div>
+    </div>
+
+
+    <div class="facilities">
+        <!-- <div class="facilities__header">
+            <h2>Our Facilities</h2>
+        </div> -->
+
+        <div class="facilities__container">
+
+            <%if (locals.results && locals.results.length > 0) {%>
+                <%for (var i = 0; i < results.length; ++i) { %>
+                <div class="facilities__facility">
+                    <div class="facility__spacing">
+                        <div class="spacing__content">
+                            <div class="content__desc">
+                                <div class="desc__facility-name">
+                                    <h2><%- results[i].name %></h2>
+                                </div>
+
+                                <div class="desc__facility-info">
+                                    <%- results[i].description %>
+                                </div>
+
+                                <div class="desc__facility-price">
+                                    <h3>Starting from £<%- results[i].price %> p/h</h3> 
+                                </div>
+
+                                <% if((i + 1) % 3 == 0) { %>
+                                    <div class="desc__facility-discover">
+                                        <div class="discover__link hvr-sweep-to-right hvr-sweep-to-right--white">
+                                            <a href="/facilities/discover?id=<%=results[i].id%>"><h2>Discover</h2></a>
+                                        </div>
+                                    </div>
+
+                                <% } else { %>
+                                    <div class="desc__facility-discover">
+                                        <div class="discover__link hvr-sweep-to-right">
+                                            <a href="/facilities/discover?id=<%=results[i].id%>"><h2>Discover</h2></a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+
+                            <div class="content__image">
+                                <img src="/img/facilities/<%=results[i].icon%>.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            <% } else { %>
+                <div class="acount">
+                    <div class="account__section account__section--full-width account__section--center account__details">
+                        <div class="section__not-found">
+                            <div class="not-found__image">
+                                <img src="/img/icons/sadface.jpg" />
+                            </div>
+
+                            <h2>There are currently no Facilities, check back later!</h2>
+                        </div>
+                    </div>
+                </div>
+
+            <% } %> 
+
+            
+        </div>
+
+        <%if (locals.no_pages && locals.no_items) {%>
+            <% if(no_pages > 1) { %>
+                <!-- page numbers -->
+                <p>number of pages: <%=no_pages%></p>
+                
+                <div> 
+                <% for (var i = 1; i <= no_pages; ++i) { %>
+                    <form method="POST" action="/facilities">
+                        <input type="submit", value="<%=i%>">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                        <input type="hidden", name="page_no", value="<%=i%>">
+                        <input type="hidden", name="no_items", value="<%=no_items%>">
+                    </form>
+                <% } %>
+                </div>
+            <% } %>
+        <% } %>
+
+    </div>
+</div>
+
+
+<%- include('../partials/footer') %>
+<%- include('../partials/foot') %>

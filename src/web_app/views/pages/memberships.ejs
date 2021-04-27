@@ -1,0 +1,162 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+
+<div class="container">
+
+    <div class="page-title">
+        <div class="page-title__header">
+            <h2>Pricing Options</h2>
+        </div>
+    </div>
+
+
+    <div class="pricing-table">
+        <!-- <div class="pricing-table__header">
+            <h2>Pricing Options</h2>
+        </div> -->
+
+        <div class="pricing-table__container">
+            <div class="pricing-table__option hvr-float">
+                <a href="/payment/membership/<%- pricing[0].type %>">
+                    <div class="option__content">
+                        <div class="content__membership-plan">
+                            <h2>Monthly</h2>
+                        </div>
+
+                        <div class="content__membership-desc">
+                            Pay monthly from a selected of different sports. Each sport allows access to that sports facilitiy and the activities taking place within it.
+                        </div>
+
+                        <div class="content__membership-price">
+                            starting from <h2>£<%- pricing[0].amount %></h2>
+                            <small>For <%- pricing[0].name %></small>
+                        </div>
+
+                        <div class="content__membership-join">
+                            <div class="join__link hvr-sweep-to-right">
+                                <h2>Join Now</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="pricing-table__option pricing-table__option--focus hvr-float">
+                <a href="/payment/membership/<%- pricing[1].type %>">
+                    <div class="option__content">
+                        <div class="content__image">
+                            <img src="/img/icons/star (1).png" />
+                        </div>
+
+                        <div class="content__membership-plan">
+                            <h2>Annual</h2>
+                        </div>
+
+                        <div class="content__membership-desc">
+                            Pay annually from a selection of different sports. Get the best value for money! Each sport allows access to that sports facility and the activities taking place within it.
+                        </div>
+
+                        <div class="content__membership-price">
+                            starting from <h2>£<%- pricing[1].amount %></h2>
+                            <small>For <%- pricing[1].name %></small>
+                        </div>
+
+                        <div class="content__membership-join">
+                            <div class="join__link hvr-sweep-to-right">
+                                <h2>Join Now</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="pricing-table__option hvr-float">
+                <a href="/payment/membership/<%- pricing[2].type %>">
+                    <div class="option__content">
+                        <div class="content__membership-plan">
+                            <h2>Sports Pass</h2>
+                        </div>
+
+                        <div class="content__membership-desc">
+                            The best package for those wanting to use multiple facilities to participate in lots of different sports. This pass grants access to all of them at a discounted rate!
+                        </div>
+
+                        <div class="content__membership-price">
+                            starting from <h2>£<%- pricing[2].amount %></h2>
+                        </div>
+
+                        <div class="content__membership-join">
+                            <div class="join__link hvr-sweep-to-right">
+                                <h2>Join Now</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="gallery">
+        <div class="gallery__container">
+            <div class="gallery__content">
+                <img class="content__image content__image--first" src="/img/gallery/an-on-treadmill-1954524.jpg" /> 
+                <img class="content__image content__image--last" src="/img/gallery/person-holding-barbell-841130.jpg" /> 
+            </div>
+
+            <div class="gallery__content">
+                <img class="content__image content__image--last" src="/img/gallery/close-up-photo-of-person-holding-tennis-racket-and-ball-1432039.jpg" /> 
+                <img class="content__image content__image--first" src="/img/gallery/person-swimming-on-body-of-water-863988.jpg" /> 
+            </div>
+        </div>
+    </div> -->
+
+    <div class="statistics">
+        <div class="statistics__container">
+            <div class="statistics__header">
+                <h2>Why Join Us</h2>
+            </div>
+
+            <div class="statistics__content">
+                <div class="content__statistic">
+                    <div class="statistic__image">
+                        <img src="/img/icons/gym-white.png" />
+                    </div>
+
+                    <div class="statistic__desc">
+                        We provide some of the best and highest ranked facilities in the country. Join us to gain access to some of the best training equipment you will find!
+                    </div>
+                </div>
+                
+                <div class="content__statistic">
+                    <div class="statistic__image">
+                        <img src="/img/icons/emoji-white.png">
+                    </div>
+
+                    <div class="statistic__desc">
+                        Here at The Edgy,
+                        <b>95%</b>
+                        of our members are statisfied with the facilities and services that we provide!
+                    </div>
+                </div>
+
+                <div class="content__statistic">
+                    <div class="statistic__image">
+                        <img src="/img/icons/cup-white.png">                    
+                    </div>
+
+                    <div class="statistic__desc">
+                        Did you know that The Edgy has been rated amongst the top
+                        <b>5%</b>
+                        of sports centers in the country? We are very proud of this and happy to have you on board!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer') %>
+<%- include('../partials/foot') %>

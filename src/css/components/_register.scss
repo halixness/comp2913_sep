@@ -1,0 +1,23 @@
+// Register page styles
+
+.register {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: $quatenary;
+
+    &--background {
+        background-image: url('/img/gallery/person-holding-barbell-841130.jpg');
+        background-position: 50% 0%;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &__divider {
+        background-color: $quatenary;
+        // opacity: .9;
+        width: 80%;
+    }
+}

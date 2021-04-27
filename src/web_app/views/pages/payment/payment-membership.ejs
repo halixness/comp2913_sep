@@ -1,0 +1,350 @@
+<%- include('../../partials/head') %>
+
+<% if (option > 0 ) { %>
+  <div id="refresh-membership-auto"></div>
+<% } %>
+
+<div class="modal modal--modal">
+  <div class="modal__container">
+    <div class="modal__header">
+        <h2>Add Payment Method</h2>
+        <div class="header__close modal--close">
+            <img src="/img/icons/close.png" />
+        </div>
+    </div>
+      
+    <form class="modal__form sr-payment-form" action="/user/account/add/card" method="POST" autocomplete="off" id="payment-form">
+      <div class="modal__content">
+        <div class="sr-root">
+          <div class="sr-main">
+            <form id="payment-form payment" class="sr-payment-form">
+                <div class="sr-combo-inputs-row payment__input">
+                    <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+                    <div class="sr-input sr-card-element" id="card-element"></div>
+                </div>
+
+                <div class="sr-field-error  payment__error" id="card-errors" role="alert"></div>
+                
+                <div class="payment__inline">
+                    <button id="submit" class="payment__submit hvr-sweep-to-right">
+                        <!-- <div class="spinner hidden" id="spinner"></div> -->
+                        <h3 id="button-text">Add Card</h3><span id="order-amount"></span>
+                    </button>
+
+                    <img src="/img/elements/loader.gif" class="payment__spinner payment__spinner--card payment__spinner--hidden" />
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>  
+</div>
+
+
+<div class="modal modal--delete">
+  <div class="modal__container">
+    <div class="modal__header modal__header--danger">
+      <h2>Confirm the payment</h2>
+      <div class="header__close modal--close">
+        <img src="/img/icons/close-white.png" />
+      </div>
+    </div>
+
+    <div class="modal__content">
+      Are you sure you want to proceed?
+
+      <div class="sr-root">
+        <div class="sr-main">
+          <form id="submit-form" class="sr-payment-form">
+            <input type="hidden" name="_csrf" value="<%- csrfToken %>" />
+
+            <div class="sr-field-error-payment payment__error" id="payment-errors" role="alert"></div>
+
+            <div class="payment__inline">
+              <button id="submit-payment" class="payment__submit hvr-sweep-to-right">
+                <h3 id="button-text">Confirm Payment</h3><span id="order-amount"></span>
+              </button>
+
+              <img src="/img/elements/loader.gif" class="payment__spinner payment__spinner--payment payment__spinner--hidden" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container container--full-height">
+  <div class="page-title">
+    <div class="page-title__header">
+        <h2>New Membership</h2>
+    </div>
+  </div>
+
+  <div class="payment">
+    <div class="payment__half payment__order">
+      <div class="half__container">
+        <div class="half__title">
+          <h3>Customize your plan</h3>
+        </div>
+
+        <% if (option > 0) { %>
+          <div id="slide-1" class="half__slide--d-none">
+        <% } else { %>
+          <div id="slide-1">
+        <% } %>
+          <div class="order__select">
+            <div class="select__group">
+              <label class="select__label"><h3>Membership type</h3></label>
+
+              <select name="sport" class="select__select membership__sport" >
+                <option selected disabled>Please select the membership type</option>
+                <% for (var i = 0; i < pricing.length; i++) { %>
+                  <% if (pricing[i].id == option) { %>
+                    <% if (pricing[i].type == 1) { %>
+                      <option selected value="<%- pricing[i].id %>">Monthly <%- pricing[i].name %> Membership</option>
+                    <% } else if (pricing[i].type == 2) { %>
+                      <option selected value="<%- pricing[i].id %>">Annual <%- pricing[i].name %> Membership</option>
+                    <% } else { %>
+                      <option selected value="<%- pricing[i].id %>">Annual Sports Pass Membership</option>
+                    <% } %>                   
+
+                  <% } else { %>
+
+                    <% if (pricing[i].type == 1) { %>
+                      <option value="<%- pricing[i].id %>">Monthly <%- pricing[i].name %> Membership</option>
+                    <% } else if (pricing[i].type == 2) { %>
+                      <option value="<%- pricing[i].id %>">Annual <%- pricing[i].name %> Membership</option>
+                    <% } else { %>
+                      <option value="<%- pricing[i].id %>">Annual Sports Pass Membership</option>
+                    <% } %>
+                  <% } %>
+                <% } %>
+              </select>
+            </div>
+          </div>
+
+          <div class="order__details">
+            <div class="details__card details__card--empty" id="order-error">
+              No Membership Selected
+            </div>
+
+            <div class="details__card details__card--selectable details__card--d-none" id="order-select">
+              <div class="card__title">
+                <img src="/img/account/membership.png" />
+                <h3 id="item-title">Monthly Tennis Membership</h3>
+              </div>
+
+              <div class="card__content">
+                <div class="content__content">
+                  <div class="content__type">
+                    <img src="/img/icons/basketball-white.png" />
+                    <h3>Whats on offer</h3>
+                  </div>
+
+                  <div id="membership-description">
+                    UNKNOWN
+                  </div>
+                </div>
+
+                <div class="content__content">
+                  <div class="content__type">
+                    <img src="/img/icons/pay-white.png" />
+                    <h3>Price</h3> 
+                  </div>
+
+                  <div id="membership-price" class="content__price">
+                    UNKNOWN
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="details__inline">
+              <div class="inline__button inline__button--next hvr-sweep-to-right inline__button--d-none" id="membership-next">
+                <h3>Next</h3>
+              </div>
+
+              <button type="button" disabled class="inline__button inline__button--disabled">
+                <h3>Next</h3>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <% if (option > 0) { %>
+          <div id="slide-2">
+        <% } else { %>
+          <div id="slide-2" class="half__slide--d-none">
+        <% } %>
+
+          <div class="order__current">
+            <table class="current__option">
+              <tbody>
+                <tr>
+                  <td>Membership Type</td>
+                  <td id="membership-type">UNKNOWN</td>
+                  <td class="option__edit edit__slide" target_slide="1">Edit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="order__select">
+            <div class="select__group">
+              <label class="select__label"><h3>Payment Method</h3></label>
+
+              <% if(locals.cards && locals.cards.length > 0){ %>
+                <select name="card" class="select__select payment__card">
+                  <% for (var i = 0; i < cards.length;  i++ ) { %>
+                    <% if(cards[i].type != "__CASH__" ) { %> 
+                      <option value="<%- cards[i].id %>"><%- cards[i].type %> ending in <%- cards[i].number %></option>
+                    <% } %>
+                  <% } %>
+                <select>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="order__details">
+            <% if (!locals.cards || locals.cards.length <= 0) { %>
+              <div class="details__card">
+                No Payment Methods Available
+              </div>
+            <% } else { %>
+
+              <div class="details__card details__card--d-none details__card--empty" id="card-error">
+                No Card Selected
+              </div>
+
+              <div class="details__card details__card--selectable" id="card-select">
+                <div class="card__title">
+                  <img src="/img/icons/confirm-white.png" />
+                  <h3 id="card-title">Payment Method</h3>
+                </div>
+
+
+                <div class="card__content">
+                  <div class="content__content">
+                    <div class="content__type">
+                      <img src="/img/icons/pay-white.png" />
+                      <h3>Type</h3> 
+                    </div>
+
+                    <div id="card-type">
+                      <%- cards[0].type %> ending in <%- cards[0].number %>
+                    </div>
+                  </div>
+
+                  <div class="content__content">
+                    <div class="content__type">
+                      <img src="/img/account/calendar.png" />
+                      <h3>Expire Date</h3> 
+                    </div>
+
+                    <div id="card-expire">
+                      <%- cards[0].expire_date %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+
+
+            <div class="details__inline">
+              <div class="inline__button hvr-sweep-to-right modal--open">
+                <h3>Add New Payment Method</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+
+    <div class="payment__half payment__total">
+      <div class="half__title">
+        <h3>Order Total</h3>
+      </div>
+
+      <% if (option > 0) { %>
+        <div class="total__total total__total--d-none total__total--default">
+      <% } else { %>
+        <div class="total__total total__total--default">
+      <% } %>
+        No Membership selected
+      </div>
+
+      <% if (option > 0) { %>
+        <div class="total__total total__total--order" id="order-total"></div>
+      <% } else { %>
+        <div class="total__total total__total--order total__total--d-none" id="order-total"></div>
+      <% } %>
+
+      <% if (option > 0) { %>
+        <div class="total__content">
+      <% } else { %>
+        <div class="total__content total__content--d-none">
+      <% } %>
+        <div class="content__order">
+          <h3>Membership Type</h3>
+
+          <div id="order-type">
+            Monthly running membership
+          </div>
+        </div>
+
+        <div class="content__order">
+          <h3>Plan</h3>
+
+          <div id="order-plan">
+            £10 p/m
+          </div>
+        </div>
+
+        <% if (type == 2) { %>
+          <div class="content__order">
+            <h3>Annual Savings</h3>
+
+            <div id="order-savings">
+              £10
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+      <div class="total__payment total__payment--d-none">
+        <h3>Payment</h3>
+
+        <div id="order-payment">
+          <% if(locals.cards && locals.cards.length > 0){ %>
+            <%- cards[0].type %> ending in <%- cards[0].number %>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="total__pay total__pay--d-none">
+        <div class="pay__submit hvr-sweep-to-right modal--open-delete">
+          <h3>Pay Now</h3>
+        </div>
+      </div>
+
+      <div class="total__cancel">
+        <a href="/memberships" class="cancel__submit hvr-sweep-to-right">
+          <h3>Cancel Payment</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Stripe Payment -->
+<script src="https://js.stripe.com/v3/" defer></script>
+<script src="/js/addCard.js" defer></script>
+<script src="/js/paymentForm.js" defer></script>
+<script type="text/javascript" src="/js/pageFunctions.js" defer></script>
+<script type="text/javascript" src="/js/paymentMethod.js" defer></script>
+
+<%- include('../../partials/foot') %>

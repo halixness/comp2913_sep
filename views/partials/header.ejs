@@ -1,0 +1,65 @@
+<div class="header-spacing"></div>
+
+<header class="header">
+    <div class="header__container">
+        <div class="header__logo">
+            <a href="/home"><img src="/img/icons/logo.png" /></a>
+        </div>
+
+        <div class="header__content">
+            <div class="header__divider">
+                <% if(locals.session.userId){ %>
+                    <div class="header__nav header__nav--inline">
+                        <ul class="nav__items">
+                            <li class="nav__item hvr-inset"><a href="/user/account"><h3>Account</h3></a></li>
+                        </ul>
+                    </div>
+                <% } %>
+
+                <div class="header__login hvr-sweep-to-right">
+                    <% if(locals.session.userId){ %>
+                        <a href="/user/logout"><h3 class="header__logout">Logout</h3></a>
+                    <% }else{ %>
+                        <a href="/user/login"><h3>Login</h3></a>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="header__nav">
+                <ul class="nav__items">
+                    <li class="nav__item hvr-inset"><a href="/memberships"><h2>Memberships</h2></a></li>
+                    <li class="nav__item hvr-inset"><a href="/facilities"><h2>Facilities</h2></a></li>
+                    <li class="nav__item hvr-inset"><a href="/activities"><h2>Book an Activity</h2></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header__content header__content--hamburger">
+            <button class="hamburger hamburger--arrowturn-r" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="header__dropdown">
+        <div class="dropdown__container">
+            <div class="dropdown__nav">
+                <ul class="nav__items"> 
+                    <li class="nav__item hvr-inset hvr-inset--white"><a href="/memberships"><h2>Memberships</h2></a></li>
+                    <li class="nav__item hvr-inset hvr-inset--white"><a href="/facilities"><h2>Facilities</h2></a></li>
+                    <li class="nav__item hvr-inset hvr-inset--white"><a href="/activities"><h2>Book an Activity</h2></a></li>
+
+                    <% if(locals.session.userId){ %>
+                        <li class="nav__item hvr-inset hvr-inset--white"><a href="/user/account"><h2>Account</h2></a></li>
+                        <li class="nav__item nav__item--login nav__item--logout hvr-sweep-to-right hvr-sweep-to-right--white"><a href="/user/logout"><h2>Logout</h2></a></li>
+                    <% }else{ %>
+                        <li class="nav__item nav__item--login hvr-sweep-to-right hvr-sweep-to-right--white"><a href="/user/login"><h2>Login</h2></a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

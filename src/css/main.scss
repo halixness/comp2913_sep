@@ -1,0 +1,180 @@
+// fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+
+// libs
+@import "libs/vars";
+@import "libs/hover";
+
+// components
+@import "components/reset";
+@import "components/scroll-to-top";
+@import "components/header";
+@import "components/footer";
+@import "components/landing";
+@import "components/memberships";
+@import "components/facilities";
+@import "components/login";
+@import "components/register";
+@import "components/account/account";
+@import "components/gallery";
+@import "hamburgers/hamburgers.scss";
+@import "components/timetable";
+@import "components/payment";
+@import "components/modal";
+@import "components/error";
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: $header_1;
+}
+
+h2 {
+    font-size: $header_2;
+}
+
+h3 {
+    font-size: $header_3;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+
+    &--center {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &--full-height { height: 100%; }
+
+    &--full-height-no-header { 
+        height: calc(100% - 115px);
+    }
+
+    &--margin {
+        margin: 0 10%;
+        width: auto;
+    }
+
+}
+
+.slick-dots {
+    bottom: -60px !important;
+    li {
+        border: $border_thickness solid $white;
+        border-radius: 40px;
+        width: auto !important;
+        height: auto !important;
+        padding: 5px 13px !important;
+    }
+}
+
+
+.payment {
+    &__input {
+        padding: $padding_border_block;
+        margin: 10px 0;
+    }
+
+    &__error:not(:empty) {
+        color: $red;
+        margin: 10px 0;
+        padding: $padding_border_block;
+    }
+
+    &__submit {
+        border: $border_thickness solid $black;
+        padding: $padding_border_block;
+        color: $black;
+        background-color: $white;
+        cursor: pointer;
+        margin-left: 15px;
+    }
+
+    &__inline {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+
+    }
+
+    &__spinner {
+        width: 100px;
+        display: inline-block;
+         
+        &--hidden {
+            display: none;
+        }
+    }
+}
+
+
+.page-title {
+    padding: 30px 0;
+    background-color: $primary;
+
+    
+    &__header {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: $padding_border_block;
+        text-align: center;
+        color: $white;
+    }
+}
+
+.breadcrumbs {
+    // padding: $padding_main_section;
+    width: 100%;
+
+    &--margin-bottom {
+        margin-bottom: 60px;
+    }
+
+    &__selector {
+        color: $black;
+        border-bottom: $border_thickness solid $black;
+
+        .selector {
+            &__item {
+                display: inline-block;
+                padding: 20px 10px;
+                cursor: pointer;
+
+                &--selected {
+                    background-color: $tertiary;
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: $max_width_secondary) {
+    .breadcrumbs {
+
+        &__selector {
+            text-align: right;
+        }
+    }
+}
+
+
+@media only screen and (max-width: $max_width_tertiary) {
+    h1 {
+        font-size: $header_1 - 10;
+    }
+}
+
+@media only screen and (max-height: $max_height_secondary) {
+    .container {
+        &--full-height-no-header { 
+            height: auto;
+        }
+    }
+}
